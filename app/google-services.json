@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "638350039117",
+    "project_id": "firenotes-4e66a",
+    "storage_bucket": "firenotes-4e66a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638350039117:android:09640bdf73a0262019a404",
+        "android_client_info": {
+          "package_name": "com.astriex.fruitynotes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638350039117-6hargurkactc5u3uu8th003tcsg7o29i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI6LQk4suT5VWXSadE1H7KWAxuxGyh3Ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638350039117-6hargurkactc5u3uu8th003tcsg7o29i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638350039117:android:119c1199cc6610d419a404",
+        "android_client_info": {
+          "package_name": "com.astriex.reflection"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "638350039117-6hargurkactc5u3uu8th003tcsg7o29i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBI6LQk4suT5VWXSadE1H7KWAxuxGyh3Ng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "638350039117-6hargurkactc5u3uu8th003tcsg7o29i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
