@@ -1,4 +1,4 @@
-package com.astriex.reflection.ui
+package com.astriex.reflection.ui.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
