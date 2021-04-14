@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".MainActivity"
+    tools:context=".ui.MainActivity"
     android:gravity="center">
 
     <TextView

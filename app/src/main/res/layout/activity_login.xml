@@ -6,7 +6,7 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginActivity">
 
     <ProgressBar
         android:id="@+id/loginProgress"
@@ -30,7 +30,7 @@
             android:maxLines="1" />
 
         <EditText
-            android:id="@+id/actPassword"
+            android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
