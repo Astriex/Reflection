@@ -46,7 +46,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
     private fun userRegistration() {
         viewModel.registerUser(email, password, username).observe(this, Observer {
-            if(it) startPostNoteActivity() else showRegistrationFailedMessage()
+            if(it != null) startPostNoteActivity() else showRegistrationFailedMessage()
         })
     }
 
@@ -65,7 +65,7 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun showRegistrationFailedMessage() {
-        Toast.makeText(this, viewModel.registrationMessage.value!!, Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show()
     }
 
 }
