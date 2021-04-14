@@ -1,18 +1,19 @@
 package com.astriex.reflection.repository
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.NotesApplication
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.StorageReference
 
 class FirebaseRepository() {
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private var collectionReference: CollectionReference = db.collection("Users")
+    private var userCollectionReference: CollectionReference = db.collection("Users")
+    private lateinit var storageReference: StorageReference
+    private var notebookCollectionReference: CollectionReference = db.collection("Notebook")
 
     // user auth and db preparations done flag
     private val _isSuccessfulRegistration = MutableLiveData<Boolean>(false)
@@ -50,7 +51,7 @@ class FirebaseRepository() {
         NotesApplication.appUserId = currentUserId
 
         // save document to firestore
-        collectionReference.add(userObj)
+        userCollectionReference.add(userObj)
             .addOnSuccessListener { documentReference ->
                 documentReference.get()
                     .addOnCompleteListener {
