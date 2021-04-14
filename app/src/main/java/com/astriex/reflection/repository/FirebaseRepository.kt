@@ -14,28 +14,33 @@ class FirebaseRepository(private val application: Application) {
 
     // user auth and db preparations done flags
     private val _isSuccessfulRegistration = MutableLiveData<Boolean>(false)
-    val isSuccessfulRegistration: LiveData<Boolean>
-            get() = _isSuccessfulRegistration
+
     private val _currentUsername = MutableLiveData<String>("")
     val currentUsername: LiveData<String>
         get() = _currentUsername
+    private val _registrationMessage = MutableLiveData<String>("")
+    val registrationMessage: LiveData<String>
+        get() = _registrationMessage
 
     // progress indicator
     private val _isLoading = MutableLiveData<Boolean>(false)
     val isLoading: LiveData<Boolean>
         get() = _isLoading
 
-    suspend fun registerUser(email: String, password: String, username: String) {
+    fun registerUser(email: String, password: String, username: String): LiveData<Boolean> {
         _isLoading.postValue(true)
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                _isLoading.postValue(false)
                 _isSuccessfulRegistration.postValue(task.isSuccessful)
                 _currentUsername.postValue(username)
+                _registrationMessage.postValue("success")
+                _isLoading.postValue(false)
             }
             .addOnFailureListener {
                 _isLoading.postValue(false)
+                _registrationMessage.postValue("failure")
             }
+        return _isSuccessfulRegistration
     }
 
 }
