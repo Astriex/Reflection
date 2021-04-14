@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
-            name="loginRegisterViewModel"
-            type="com.astriex.reflection.ui.viewModels.LoginRegisterViewModel" />
+
     </data>
 
     <LinearLayout

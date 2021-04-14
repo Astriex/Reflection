@@ -2,11 +2,9 @@ package com.astriex.reflection.repository
 
 import android.app.Application
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
 
 class FirebaseRepository(private val application: Application) {
     private var userMutableLiveData: MutableLiveData<FirebaseUser> = MutableLiveData()
