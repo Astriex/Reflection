@@ -18,14 +18,6 @@
         android:padding="16dp"
         tools:context=".ui.CreateAccountActivity">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.message}"
-            android:textSize="30sp"
-            android:textColor="@color/black"
-            tools:text="test"/>
-
         <EditText
             android:id="@+id/etUsername"
             android:layout_width="match_parent"

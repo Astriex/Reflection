@@ -1,6 +1,8 @@
 package com.astriex.reflection.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -37,14 +39,33 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnCreateAccount.setOnClickListener {
             getFieldData()
-            viewModel.registerUser(email, password, username)
+            userRegistration()
         }
+    }
+
+    private fun userRegistration() {
+        viewModel.registerUser(email, password, username)
+        if(viewModel.isRegistrationSuccessful.value!!) {
+            startPostNoteActivity()
+        } else {
+            showRegistrationFailedMessage()
+        }
+    }
+
+    private fun startPostNoteActivity() {
+        startActivity(
+            Intent(this, PostNoteActivity::class.java)
+        )
     }
 
     private fun getFieldData() {
         username = binding.etUsername.text.toString()
         password = binding.etPassword.text.toString()
         email = binding.actvEmail.text.toString()
+    }
+
+    private fun showRegistrationFailedMessage() {
+        Toast.makeText(this, "Registration failed, try again", Toast.LENGTH_SHORT).show()
     }
 
 }
