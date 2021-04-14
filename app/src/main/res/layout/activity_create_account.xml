@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<layout>
 
     <data>
-
+        <import type="android.view.View"/>
+        <variable
+            name="viewModel"
+            type="com.astriex.reflection.ui.viewModels.LoginRegisterViewModel" />
     </data>
 
     <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
         tools:context=".ui.CreateAccountActivity">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.message}"
+            android:textSize="30sp"
+            android:textColor="@color/black"
+            tools:text="test"/>
 
         <EditText
             android:id="@+id/etUsername"
@@ -26,7 +37,7 @@
             android:paddingBottom="16dp" />
 
         <AutoCompleteTextView
-            android:id="@+id/actEmail"
+            android:id="@+id/actvEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -53,6 +64,13 @@
             android:textColor="@color/teal_200"
             android:textStyle="bold" />
 
-        </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.INVISIBLE, default=gone}"/>
+
+    </LinearLayout>
 
 </layout>
