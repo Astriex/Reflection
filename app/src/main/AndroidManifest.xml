@@ -14,7 +14,7 @@
         <activity android:name=".ui.activities.PostNoteActivity" />
         <activity android:name=".ui.activities.CreateAccountActivity" />
         <activity android:name=".ui.activities.LoginActivity" />
-        <activity android:name=".ui.activities.MainActivity">
+        <activity android:name=".ui.activities.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

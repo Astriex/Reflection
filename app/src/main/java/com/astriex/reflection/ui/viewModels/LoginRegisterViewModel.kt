@@ -13,15 +13,15 @@ class LoginRegisterViewModel(private val repository: FirebaseRepository) : ViewM
         get() = repository.isLoading
     val currentUsername: LiveData<String> = repository.currentUsername
     val registrationMessage: LiveData<String> = repository.registrationMessage
-    private lateinit var check: LiveData<Boolean>
+    private lateinit var registrationDone: MutableLiveData<Boolean>
 
     fun registerUser(email: String, password: String, username: String): LiveData<Boolean> {
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)) {
-            check = repository.registerUser(email, password, username)
+            registrationDone.postValue(repository.registerUser(email, password, username).value!!)
         } else {
-
+            registrationDone.postValue(false)
         }
-        return check
+        return registrationDone
     }
 
 }
