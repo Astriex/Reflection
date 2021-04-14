@@ -27,7 +27,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            LoginRegisterViewModelFactory(FirebaseRepository(application))
+            LoginRegisterViewModelFactory(FirebaseRepository())
         ).get(
             LoginRegisterViewModel::class.java
         )
