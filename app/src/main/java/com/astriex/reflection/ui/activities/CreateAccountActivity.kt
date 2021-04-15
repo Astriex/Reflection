@@ -2,14 +2,12 @@ package com.astriex.reflection.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
+import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
-import com.astriex.reflection.data.repository.FirebaseRepository
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModel
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModelFactory
 
@@ -45,9 +43,8 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun userRegistration() {
-        viewModel.registerUser(email, password, username).observe(this, Observer {
-            if(it != null) startPostNoteActivity() else showRegistrationFailedMessage()
-        })
+        viewModel.registerUser(email, password, username)
+        startPostNoteActivity()
     }
 
     private fun startPostNoteActivity() {
@@ -55,17 +52,13 @@ class CreateAccountActivity : AppCompatActivity() {
             Intent(this, PostNoteActivity::class.java)
                 .putExtra("username", username)
         )
-        finish()
+        //finish()
     }
 
     private fun getFieldData() {
         username = binding.etUsername.text.toString()
         password = binding.etPassword.text.toString()
         email = binding.actvEmail.text.toString()
-    }
-
-    private fun showRegistrationFailedMessage() {
-        Toast.makeText(this, "Registration failed", Toast.LENGTH_SHORT).show()
     }
 
 }

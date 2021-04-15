@@ -7,22 +7,21 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.astriex.reflection.NotesApplication
 import com.astriex.reflection.R
-import com.astriex.reflection.data.repository.FirebaseRepository
+import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.viewModels.PostNoteViewModel
 import com.astriex.reflection.ui.viewModels.PostNoteViewModelFactory
 
-class PostNoteActivity : AppCompatActivity(), View.OnClickListener {
+class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
     private lateinit var viewModel: PostNoteViewModel
     private val GALLERY_CODE = 1
     private var imageUri: Uri? = null
     private lateinit var title: String
     private lateinit var content: String
+    private lateinit var username: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,53 +33,36 @@ class PostNoteActivity : AppCompatActivity(), View.OnClickListener {
         )
         binding.viewModel = viewModel
 
-        setupListeners()
+        username = intent.getStringExtra("username")!!
+
         setupViews()
     }
 
     private fun setupViews() {
-        binding.tvPostUsername.text = NotesApplication.appUsername
+        binding.tvPostUsername.text = username
     }
 
-    private fun setupListeners() {
-        binding.btnPostSave.setOnClickListener(this)
-        binding.ivAddPhoto.setOnClickListener(this)
-    }
-
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btnPostSave -> {
-                getFields()
-                savePost()
-            }
-            R.id.ivAddPhoto -> {
-                getImage()
-            }
+    fun saveNote(view: View) {
+        getFields()
+        if(imageUri != null) {
+            viewModel.saveNote(title, content, imageUri, username)
+            startNotesListActivity()
+        } else {
+            Toast.makeText(this, "Please select a photo", Toast.LENGTH_SHORT).show()
         }
-    }
-
-    private fun savePost() {
-        viewModel.savePost(title, content, imageUri, NotesApplication.appUsername!!)
-            .observe(this, Observer {
-                if (it != null) startNotesListActivity() else showNoteSaveFailedMessage()
-            })
     }
 
     private fun startNotesListActivity() {
         startActivity(Intent(this, NotesListActivity::class.java))
-        finish()
-    }
-
-    private fun showNoteSaveFailedMessage() {
-        Toast.makeText(this, "Saving note failed", Toast.LENGTH_SHORT).show()
+        //finish()
     }
 
     private fun getFields() {
-        title = binding.etPostTitle.text.toString().trim()
-        content = binding.etPostContent.text.toString().trim()
+        title = binding.etPostTitle.text.toString()
+        content = binding.etPostContent.text.toString()
     }
 
-    private fun getImage() {
+    fun getImage(view: View) {
         startActivityForResult(
             Intent(Intent.ACTION_GET_CONTENT)
                 .setType("image/*"), GALLERY_CODE

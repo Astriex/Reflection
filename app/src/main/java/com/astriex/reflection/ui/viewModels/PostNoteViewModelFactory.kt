@@ -2,7 +2,7 @@ package com.astriex.reflection.ui.viewModels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.astriex.reflection.data.repository.FirebaseRepository
+import com.astriex.reflection.data.repositories.FirebaseRepository
 
 class PostNoteViewModelFactory(private var repository: FirebaseRepository): ViewModelProvider.Factory {
 

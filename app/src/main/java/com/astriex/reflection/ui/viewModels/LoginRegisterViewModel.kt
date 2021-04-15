@@ -1,20 +1,25 @@
 package com.astriex.reflection.ui.viewModels
 
 import android.text.TextUtils
-import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.astriex.reflection.data.repository.FirebaseRepository
+import androidx.lifecycle.viewModelScope
+import com.astriex.reflection.data.repositories.FirebaseRepository
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class LoginRegisterViewModel(private val repository: FirebaseRepository) : ViewModel() {
-    val loading: LiveData<Boolean>
-        get() = repository.isLoading
-    private lateinit var registrationDone: LiveData<Boolean>
+    val isLoading = MutableLiveData<Boolean>(false)
 
-    fun registerUser(email: String, password: String, username: String): LiveData<Boolean> {
+    fun registerUser(email: String, password: String, username: String) {
         if(!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)) {
-            registrationDone = repository.registerUser(email, password, username)
+            viewModelScope.launch {
+                isLoading.postValue(true)
+                repository.registerUser(email, password, username)
+                delay(3000)
+                isLoading.postValue(false)
+            }
         }
-        return registrationDone
     }
 
 }
