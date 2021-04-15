@@ -1,18 +1,21 @@
 package com.astriex.reflection.repository
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.NotesApplication
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class FirebaseRepository() {
     private var firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var userCollectionReference: CollectionReference = db.collection("Users")
-    private lateinit var storageReference: StorageReference
+    private var storageReference: StorageReference = FirebaseStorage.getInstance().reference
     private var notebookCollectionReference: CollectionReference = db.collection("Notebook")
 
     // user auth and db preparations done flag
@@ -64,6 +67,26 @@ class FirebaseRepository() {
                     }
             }
             .addOnFailureListener { }
+    }
+
+    fun savePost(title: String, content: String, imageUri: Uri) {
+        _isLoading.postValue(true)
+
+        val filepath: StorageReference = storageReference
+            .child("notebook_images")
+            .child("my_image_" + Timestamp.now().seconds)
+
+        filepath.putFile(imageUri)
+            .addOnSuccessListener {
+                _isLoading.postValue(false)
+                // TODO: create Notebook object
+                // TODO: invoke collectionReference
+                // TODO: save Notebook instance
+
+            }
+            .addOnFailureListener{
+                _isLoading.postValue(false)
+            }
     }
 
 }
