@@ -4,7 +4,7 @@ import android.net.Uri
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.astriex.reflection.repository.FirebaseRepository
+import com.astriex.reflection.data.repository.FirebaseRepository
 
 class PostNoteViewModel(private val repository: FirebaseRepository): ViewModel() {
     val isLoading: LiveData<Boolean>

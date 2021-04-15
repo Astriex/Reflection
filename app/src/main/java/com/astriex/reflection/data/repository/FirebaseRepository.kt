@@ -1,9 +1,10 @@
-package com.astriex.reflection.repository
+package com.astriex.reflection.data.repository
 
 import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.NotesApplication
+import com.astriex.reflection.data.models.User
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
@@ -45,16 +46,18 @@ class FirebaseRepository() {
         val currentUserId = firebaseAuth.currentUser!!.uid
 
         // create user object to save to User collection
-        val userObj = HashMap<String, String>()
-        userObj.put("userId", currentUserId)
-        userObj.put("username", username)
+        //val userObj = HashMap<String, String>()
+        //userObj.put("userId", currentUserId)
+        //userObj.put("username", username)
+
+        val user = User(username, currentUserId)
 
         // save data to app class to avoid unnecessary db calls
         NotesApplication.appUsername = username
         NotesApplication.appUserId = currentUserId
 
         // save document to firestore
-        userCollectionReference.add(userObj)
+        userCollectionReference.add(user)
             .addOnSuccessListener { documentReference ->
                 documentReference.get()
                     .addOnCompleteListener {

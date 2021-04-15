@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
-import com.astriex.reflection.repository.FirebaseRepository
+import com.astriex.reflection.data.repository.FirebaseRepository
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModel
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModelFactory
 

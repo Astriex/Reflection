@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.NotesApplication
 import com.astriex.reflection.R
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
-import com.astriex.reflection.repository.FirebaseRepository
+import com.astriex.reflection.data.repository.FirebaseRepository
 import com.astriex.reflection.ui.viewModels.PostNoteViewModel
 import com.astriex.reflection.ui.viewModels.PostNoteViewModelFactory
 

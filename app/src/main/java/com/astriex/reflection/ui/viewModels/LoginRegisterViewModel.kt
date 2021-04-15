@@ -3,7 +3,7 @@ package com.astriex.reflection.ui.viewModels
 import android.text.TextUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.astriex.reflection.repository.FirebaseRepository
+import com.astriex.reflection.data.repository.FirebaseRepository
 
 class LoginRegisterViewModel(private val repository: FirebaseRepository) : ViewModel() {
     val loading: LiveData<Boolean>
