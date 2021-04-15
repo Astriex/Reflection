@@ -33,7 +33,9 @@ class PostNoteActivity : AppCompatActivity() {
         )
         binding.viewModel = viewModel
 
-        username = intent.getStringExtra("username")!!
+        intent.getStringExtra("username")?.let {
+            username = it
+        }
 
         setupViews()
     }
