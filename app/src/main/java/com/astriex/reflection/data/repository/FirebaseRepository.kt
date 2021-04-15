@@ -82,7 +82,7 @@ class FirebaseRepository() {
         filepath.putFile(imageUri)
             .addOnSuccessListener {
                 _isLoading.postValue(false)
-                // TODO: create Notebook object
+                // TODO: create Note object
                 // TODO: invoke collectionReference
                 // TODO: save Notebook instance
 
