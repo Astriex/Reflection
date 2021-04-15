@@ -4,13 +4,15 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.NotesApplication
 import com.astriex.reflection.R
-import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.data.repository.FirebaseRepository
+import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.viewModels.PostNoteViewModel
 import com.astriex.reflection.ui.viewModels.PostNoteViewModelFactory
 
@@ -30,6 +32,7 @@ class PostNoteActivity : AppCompatActivity(), View.OnClickListener {
         viewModel = ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository())).get(
             PostNoteViewModel::class.java
         )
+        binding.viewModel = viewModel
 
         setupListeners()
         setupViews()
@@ -57,7 +60,19 @@ class PostNoteActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun savePost() {
-        viewModel.savePost(title, content, imageUri)
+        viewModel.savePost(title, content, imageUri, NotesApplication.appUsername!!)
+            .observe(this, Observer {
+                if (it != null) startNotesListActivity() else showNoteSaveFailedMessage()
+            })
+    }
+
+    private fun startNotesListActivity() {
+        startActivity(Intent(this, NotesListActivity::class.java))
+        finish()
+    }
+
+    private fun showNoteSaveFailedMessage() {
+        Toast.makeText(this, "Saving note failed", Toast.LENGTH_SHORT).show()
     }
 
     private fun getFields() {

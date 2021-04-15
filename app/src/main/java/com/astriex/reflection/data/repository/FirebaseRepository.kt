@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.NotesApplication
+import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.models.User
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -20,7 +21,7 @@ class FirebaseRepository() {
     private var notebookCollectionReference: CollectionReference = db.collection("Notebook")
 
     // user auth and db preparations done flag
-    private val _isSuccessfulRegistration = MutableLiveData<Boolean>(false)
+    private val _isSuccessful = MutableLiveData<Boolean>(false)
 
     // progress indicator
     private val _isLoading = MutableLiveData<Boolean>(false)
@@ -29,6 +30,7 @@ class FirebaseRepository() {
 
     fun registerUser(email: String, password: String, username: String): LiveData<Boolean> {
         _isLoading.postValue(true)
+        _isSuccessful.postValue(false)
         firebaseAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -39,7 +41,7 @@ class FirebaseRepository() {
             .addOnFailureListener {
                 _isLoading.postValue(false)
             }
-        return _isSuccessfulRegistration
+        return _isSuccessful
     }
 
     private fun setupFirestore(username: String) {
@@ -63,7 +65,7 @@ class FirebaseRepository() {
                     .addOnCompleteListener {
                         if (it.result!!.exists()) {
                             _isLoading.postValue(false)
-                            _isSuccessfulRegistration.postValue(true)
+                            _isSuccessful.postValue(true)
                         } else {
                             _isLoading.postValue(false)
                         }
@@ -72,8 +74,9 @@ class FirebaseRepository() {
             .addOnFailureListener { }
     }
 
-    fun savePost(title: String, content: String, imageUri: Uri) {
+    fun savePost(title: String, content: String, imageUri: Uri, username: String): LiveData<Boolean> {
         _isLoading.postValue(true)
+       // _isSuccessful.postValue(false)
 
         val filepath: StorageReference = storageReference
             .child("notebook_images")
@@ -82,14 +85,30 @@ class FirebaseRepository() {
         filepath.putFile(imageUri)
             .addOnSuccessListener {
                 _isLoading.postValue(false)
-                // TODO: create Note object
-                // TODO: invoke collectionReference
-                // TODO: save Notebook instance
+
+                // get image url
+                filepath.downloadUrl.addOnSuccessListener {
+                    val note = Note(
+                        title,
+                        content,
+                        it.toString(),
+                        firebaseAuth.currentUser!!.uid,
+                        Timestamp.now(),
+                        username
+                    )
+                    // save note to Notebook collection
+                    notebookCollectionReference.add(note)
+                        .addOnSuccessListener {
+                            _isSuccessful.postValue(true)
+                        }
+                        .addOnFailureListener {  }
+                }
 
             }
-            .addOnFailureListener{
+            .addOnFailureListener {
                 _isLoading.postValue(false)
             }
+        return _isSuccessful
     }
 
 }

@@ -12,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Reflection">
+        <activity android:name=".ui.activities.NotesListActivity"></activity>
         <activity android:name=".ui.activities.PostNoteActivity" />
         <activity android:name=".ui.activities.CreateAccountActivity" />
         <activity android:name=".ui.activities.LoginActivity" />
