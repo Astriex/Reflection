@@ -49,10 +49,10 @@ class CreateAccountActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             viewModel.registerUser(email, password, username)
         }
-        startPostNoteActivity()
+        showNewNote()
     }
 
-    private fun startPostNoteActivity() {
+    private fun showNewNote() {
         startActivity(
             Intent(this, PostNoteActivity::class.java)
                 .putExtra("username", username)
