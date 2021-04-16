@@ -3,15 +3,35 @@ package com.astriex.reflection.ui.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
+import com.astriex.reflection.R
+import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityLoginBinding
+import com.astriex.reflection.ui.viewModels.LoginRegisterViewModel
+import com.astriex.reflection.ui.viewModels.LoginRegisterViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var bindingLogin: ActivityLoginBinding
+    private lateinit var viewModel: LoginRegisterViewModel
+    private lateinit var email: String
+    private lateinit var password: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        bindingLogin = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(bindingLogin.root)
+        bindingLogin = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        bindingLogin.lifecycleOwner = this
+
+        viewModel = ViewModelProvider(
+            this,
+            LoginRegisterViewModelFactory(FirebaseRepository())
+        ).get(
+            LoginRegisterViewModel::class.java
+        )
+        bindingLogin.viewModel = viewModel
 
         setupListeners()
     }
@@ -20,5 +40,16 @@ class LoginActivity : AppCompatActivity() {
         bindingLogin.btnCreateAccount.setOnClickListener {
             startActivity(Intent(this, CreateAccountActivity::class.java))
         }
+        bindingLogin.btnLogin.setOnClickListener {
+            getFields()
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.loginUser(email, password)
+            }
+        }
+    }
+
+    private fun getFields() {
+        email = bindingLogin.actEmail.text.toString()
+        password = bindingLogin.etPassword.text.toString()
     }
 }

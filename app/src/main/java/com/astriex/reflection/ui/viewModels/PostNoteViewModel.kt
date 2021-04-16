@@ -6,20 +6,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.repositories.FirebaseRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>(false)
 
-    fun saveNote(title: String, content: String, imageUri: Uri?, username: String) {
+    suspend fun saveNote(title: String, content: String, imageUri: Uri?, username: String) {
         if (!TextUtils.isEmpty(title) && !TextUtils.isEmpty(content) && imageUri != null) {
-            viewModelScope.launch {
-                isLoading.postValue(true)
+            isLoading.postValue(true)
+            withContext(Dispatchers.IO) {
                 repository.saveNote(title, content, imageUri, username)
-                delay(3000)
-                isLoading.postValue(false)
             }
+            isLoading.postValue(false)
         }
     }
 

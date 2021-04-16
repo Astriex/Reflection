@@ -13,6 +13,9 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.viewModels.PostNoteViewModel
 import com.astriex.reflection.ui.viewModels.PostNoteViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
@@ -47,7 +50,9 @@ class PostNoteActivity : AppCompatActivity() {
     fun saveNote(view: View) {
         getFields()
         if(imageUri != null) {
-            viewModel.saveNote(title, content, imageUri, username)
+            CoroutineScope(Dispatchers.Main).launch {
+                viewModel.saveNote(title, content, imageUri, username)
+            }
             startNotesListActivity()
         } else {
             Toast.makeText(this, "Please select a photo", Toast.LENGTH_SHORT).show()
@@ -56,7 +61,7 @@ class PostNoteActivity : AppCompatActivity() {
 
     private fun startNotesListActivity() {
         startActivity(Intent(this, NotesListActivity::class.java))
-        //finish()
+        finish()
     }
 
     private fun getFields() {

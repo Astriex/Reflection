@@ -10,6 +10,9 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModel
 import com.astriex.reflection.ui.viewModels.LoginRegisterViewModelFactory
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class CreateAccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateAccountBinding
@@ -43,7 +46,9 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun userRegistration() {
-        viewModel.registerUser(email, password, username)
+        CoroutineScope(Dispatchers.Main).launch {
+            viewModel.registerUser(email, password, username)
+        }
         startPostNoteActivity()
     }
 
@@ -52,7 +57,7 @@ class CreateAccountActivity : AppCompatActivity() {
             Intent(this, PostNoteActivity::class.java)
                 .putExtra("username", username)
         )
-        //finish()
+        finish()
     }
 
     private fun getFieldData() {

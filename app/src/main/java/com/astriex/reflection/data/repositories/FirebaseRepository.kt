@@ -1,6 +1,8 @@
 package com.astriex.reflection.data.repositories
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.models.User
 import com.google.firebase.Timestamp
@@ -8,7 +10,9 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 
 class FirebaseRepository() {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -17,9 +21,18 @@ class FirebaseRepository() {
     private val storageReference = FirebaseStorage.getInstance().reference
     private val notebookCollectionReference = db.collection("Notebook")
 
+    private val _username = MutableLiveData<String>()
+    val username: LiveData<String>
+        get() = _username
+    private val _userId = MutableLiveData<String>()
+    val userId: LiveData<String>
+        get() = _userId
+
     suspend fun registerUser(email: String, password: String, username: String) {
-        createAcc(email, password)
-        saveUserToFirestore(username)
+        withContext(Dispatchers.IO) {
+            createAcc(email, password)
+            saveUserToFirestore(username)
+        }
     }
 
     suspend fun saveUserToFirestore(username: String) {
@@ -31,34 +44,39 @@ class FirebaseRepository() {
     }
 
     suspend fun saveNote(title: String, content: String, imageUri: Uri, username: String) {
-        val filePath = uploadImageToStorage(imageUri)
-        saveNoteToFirestore(title, content, filePath, username)
+        withContext(Dispatchers.IO) {
+            val filePath = storageReference
+                .child("notebook_images")
+                .child("my_image_${Timestamp.now().seconds}")
+            filePath.putFile(imageUri).await()
+
+            notebookCollectionReference.add(
+                Note(
+                    title,
+                    content,
+                    filePath.downloadUrl.await().toString(),
+                    firebaseAuth.currentUser!!.uid,
+                    Timestamp.now(),
+                    username
+                )
+            ).await()
+        }
     }
 
-    private suspend fun saveNoteToFirestore(
-        title: String,
-        content: String,
-        filePath: StorageReference,
-        username: String
-    ) {
-        notebookCollectionReference.add(
-            Note(
-                title,
-                content,
-                filePath.downloadUrl.await().toString(),
-                firebaseAuth.currentUser!!.uid,
-                Timestamp.now(),
-                username
-            )
-        ).await()
-    }
+    suspend fun loginUser(email: String, password: String) {
+        firebaseAuth.signInWithEmailAndPassword(email, password).await()
 
-    private suspend fun uploadImageToStorage(imageUri: Uri): StorageReference {
-        val filePath = storageReference
-            .child("notebook_images")
-            .child("my_image_${Timestamp.now().seconds}")
-        filePath.putFile(imageUri).await()
-        return filePath
+        val userId = firebaseAuth.currentUser.uid
+        userCollectionReference.whereEqualTo("userId", userId)
+            .addSnapshotListener { value, error ->
+                if (!value!!.isEmpty) {
+                    value.forEach {
+                        _username.postValue(it.getString("username"))
+                        _userId.postValue(it.getString("userId"))
+                    }
+
+                }
+            }
     }
 
 }
