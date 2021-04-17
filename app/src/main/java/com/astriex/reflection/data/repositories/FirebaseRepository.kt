@@ -89,4 +89,8 @@ class FirebaseRepository() {
         return user
     }
 
+    fun signOut() {
+        firebaseAuth.signOut()
+    }
+
 }

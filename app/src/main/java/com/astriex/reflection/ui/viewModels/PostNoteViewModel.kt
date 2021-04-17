@@ -24,4 +24,8 @@ class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel(
         }
     }
 
+    fun signOut() {
+        repository.signOut()
+    }
+
 }
