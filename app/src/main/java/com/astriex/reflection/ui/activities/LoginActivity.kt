@@ -1,8 +1,8 @@
 package com.astriex.reflection.ui.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
@@ -27,7 +27,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            LoginRegisterViewModelFactory(FirebaseRepository())
+            LoginRegisterViewModelFactory(FirebaseRepository.getInstance())
         ).get(
             LoginRegisterViewModel::class.java
         )
@@ -39,12 +39,15 @@ class LoginActivity : AppCompatActivity() {
     private fun setupListeners() {
         bindingLogin.btnCreateAccount.setOnClickListener {
             startActivity(Intent(this, CreateAccountActivity::class.java))
+            finish()
         }
         bindingLogin.btnLogin.setOnClickListener {
             getFields()
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.loginUser(email, password)
             }
+            startActivity(Intent(this, PostNoteActivity::class.java))
+            finish()
         }
     }
 

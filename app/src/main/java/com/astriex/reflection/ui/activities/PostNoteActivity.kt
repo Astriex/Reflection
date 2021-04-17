@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
@@ -31,20 +32,19 @@ class PostNoteActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_note)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository())).get(
+        viewModel = ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository.getInstance())).get(
             PostNoteViewModel::class.java
         )
         binding.viewModel = viewModel
-
-        intent.getStringExtra("username")?.let {
-            username = it
-        }
 
         setupViews()
     }
 
     private fun setupViews() {
-        binding.tvPostUsername.text = username
+        viewModel.userData.observe(this, Observer {
+            binding.tvPostUsername.text = it.username
+            username = it.username
+        })
     }
 
     fun saveNote(view: View) {

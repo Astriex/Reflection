@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.ui.viewModels.PostNoteViewModel" />
@@ -38,7 +36,7 @@
             android:layout_marginBottom="4dp"
             android:text=""
             android:textColor="@color/design_default_color_primary"
-            android:textSize="22sp"
+            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvPostDate"
             app:layout_constraintEnd_toEndOf="parent"

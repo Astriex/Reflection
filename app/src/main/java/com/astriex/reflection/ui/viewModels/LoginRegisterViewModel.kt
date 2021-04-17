@@ -3,11 +3,8 @@ package com.astriex.reflection.ui.viewModels
 import android.text.TextUtils
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.map
-import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class LoginRegisterViewModel(private val repository: FirebaseRepository) : ViewModel() {

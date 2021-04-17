@@ -28,7 +28,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            LoginRegisterViewModelFactory(FirebaseRepository())
+            LoginRegisterViewModelFactory(FirebaseRepository.getInstance())
         ).get(
             LoginRegisterViewModel::class.java
         )
@@ -55,7 +55,6 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun showNewNote() {
         startActivity(
             Intent(this, PostNoteActivity::class.java)
-                .putExtra("username", username)
         )
         finish()
     }

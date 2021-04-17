@@ -1,7 +1,6 @@
 package com.astriex.reflection.data.repositories
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.models.User
@@ -9,7 +8,6 @@ import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
@@ -21,18 +19,23 @@ class FirebaseRepository() {
     private val storageReference = FirebaseStorage.getInstance().reference
     private val notebookCollectionReference = db.collection("Notebook")
 
-    private val _username = MutableLiveData<String>()
-    val username: LiveData<String>
-        get() = _username
-    private val _userId = MutableLiveData<String>()
-    val userId: LiveData<String>
-        get() = _userId
+    val userData = MutableLiveData<User>()
+
+    companion object {
+        @Volatile
+        private var instance: FirebaseRepository? = null
+        fun getInstance(): FirebaseRepository {
+            return instance ?: FirebaseRepository().also { instance = it }
+        }
+    }
 
     suspend fun registerUser(email: String, password: String, username: String) {
         withContext(Dispatchers.IO) {
             createAcc(email, password)
             saveUserToFirestore(username)
+
         }
+        getUserData()
     }
 
     suspend fun saveUserToFirestore(username: String) {
@@ -65,18 +68,25 @@ class FirebaseRepository() {
 
     suspend fun loginUser(email: String, password: String) {
         firebaseAuth.signInWithEmailAndPassword(email, password).await()
+        getUserData()
+    }
 
-        val userId = firebaseAuth.currentUser.uid
-        userCollectionReference.whereEqualTo("userId", userId)
-            .addSnapshotListener { value, error ->
-                if (!value!!.isEmpty) {
-                    value.forEach {
-                        _username.postValue(it.getString("username"))
-                        _userId.postValue(it.getString("userId"))
+    private fun getUserData(): User? {
+        var user: User? = null
+        firebaseAuth.currentUser?.let {
+            val userId = firebaseAuth.currentUser!!.uid
+            userCollectionReference
+                .whereEqualTo("userId", userId)
+                .addSnapshotListener { value, _ ->
+                    value?.forEach {
+                        if (it.exists()) {
+                            user = User(it.getString("username")!!, it.getString("userId")!!)
+                            userData.postValue(user!!)
+                        }
                     }
-
                 }
-            }
+        }
+        return user
     }
 
 }
