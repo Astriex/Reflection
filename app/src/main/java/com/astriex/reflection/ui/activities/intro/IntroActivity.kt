@@ -28,12 +28,6 @@ class IntroActivity : AppCompatActivity() {
         userLoggedInCheck()
     }
 
-    private fun userLoggedInCheck() {
-        if (viewModel.getCurrentUser() != null) {
-            startActivity(Intent(this, NotesListActivity::class.java))
-        }
-    }
-
     private fun setupActionbar() {
         supportActionBar!!.elevation = 0F
     }
@@ -41,6 +35,12 @@ class IntroActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnStart.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    private fun userLoggedInCheck() {
+        if (viewModel.getCurrentUser() != null) {
+            startActivity(Intent(this, NotesListActivity::class.java))
         }
     }
 }
