@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.viewModels.LoginRegisterViewModel" />
+            type="com.astriex.reflection.ui.activities.login.LoginViewModel" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +15,7 @@
         android:gravity="center"
         android:orientation="vertical"
         android:padding="16dp"
-        tools:context=".ui.activities.LoginActivity">
+        tools:context=".ui.activities.login.LoginActivity">
 
         <ProgressBar
             android:id="@+id/loginProgress"

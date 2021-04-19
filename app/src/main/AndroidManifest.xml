@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Reflection">
-        <activity android:name=".ui.activities.NotesListActivity"></activity>
-        <activity android:name=".ui.activities.PostNoteActivity" />
-        <activity android:name=".ui.activities.CreateAccountActivity" />
-        <activity android:name=".ui.activities.LoginActivity" />
-        <activity android:name=".ui.activities.IntroActivity">
+        <activity android:name=".ui.activities.notesList.NotesListActivity"></activity>
+        <activity android:name=".ui.activities.postNote.PostNoteActivity" />
+        <activity android:name=".ui.activities.register.CreateAccountActivity" />
+        <activity android:name=".ui.activities.login.LoginActivity" />
+        <activity android:name=".ui.activities.intro.IntroActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

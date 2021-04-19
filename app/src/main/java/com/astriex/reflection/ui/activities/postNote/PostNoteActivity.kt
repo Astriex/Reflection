@@ -1,4 +1,4 @@
-package com.astriex.reflection.ui.activities
+package com.astriex.reflection.ui.activities.postNote
 
 import android.content.Intent
 import android.net.Uri
@@ -12,11 +12,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
-import com.astriex.reflection.ui.viewModels.PostNoteViewModel
-import com.astriex.reflection.ui.viewModels.PostNoteViewModelFactory
+import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.astriex.reflection.util.Result
 
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
@@ -49,13 +49,15 @@ class PostNoteActivity : AppCompatActivity() {
 
     fun saveNote(view: View) {
         getFields()
-        if(imageUri != null) {
+        if(viewModel.isDataValid(title, content, imageUri)) {
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.saveNote(title, content, imageUri, username)
             }
-            startNotesListActivity()
+            viewModel.result.observe(this, Observer {
+                handleResponse(it)
+            })
         } else {
-            Toast.makeText(this, "Please select a photo", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, viewModel.message, Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -65,8 +67,8 @@ class PostNoteActivity : AppCompatActivity() {
     }
 
     private fun getFields() {
-        title = binding.etPostTitle.text.toString()
-        content = binding.etPostContent.text.toString()
+        title = binding.etPostTitle.text.toString().trim()
+        content = binding.etPostContent.text.toString().trim()
     }
 
     fun getImage(view: View) {
@@ -82,6 +84,19 @@ class PostNoteActivity : AppCompatActivity() {
             if (data != null) {
                 imageUri = data.data
                 binding.ivHeader.setImageURI(imageUri)
+            }
+        }
+    }
+
+    private fun handleResponse(data: Result) {
+        when(data) {
+            is Result.Success -> {
+                Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
+                startNotesListActivity()
+                finish()
+            }
+            is Result.Error -> {
+                Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,16 +1,23 @@
 package com.astriex.reflection.data.repositories
 
 import android.net.Uri
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.models.User
+import com.astriex.reflection.util.Result
 import com.google.firebase.Timestamp
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
-import kotlinx.coroutines.withContext
 
 class FirebaseRepository() {
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -20,6 +27,9 @@ class FirebaseRepository() {
     private val notebookCollectionReference = db.collection("Notebook")
 
     val userData = MutableLiveData<User>()
+    val _hasNotes = MutableLiveData<Boolean>(false)
+    val hasNotes: LiveData<Boolean>
+        get() = _hasNotes
 
     companion object {
         @Volatile
@@ -29,31 +39,39 @@ class FirebaseRepository() {
         }
     }
 
-    suspend fun registerUser(email: String, password: String, username: String) {
-        withContext(Dispatchers.IO) {
-            createAcc(email, password)
-            saveUserToFirestore(username)
-
+    suspend fun registerUser(email: String, password: String, username: String): Result {
+        return try {
+            if (createAcc(email, password) != null &&
+                saveUserToFirestore(username) != null
+            ) {
+                Result.Success(true)
+            } else {
+                Result.Success(false)
+            }
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
         }
-        getUserData()
     }
 
-    suspend fun saveUserToFirestore(username: String) {
-        userCollectionReference.add(User(username, firebaseAuth.currentUser!!.uid)).await()
+    suspend fun saveUserToFirestore(username: String): DocumentReference? {
+        return userCollectionReference.add(User(username, firebaseAuth.currentUser!!.uid)).await()
     }
 
-    suspend fun createAcc(email: String, password: String) {
-        firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+    suspend fun createAcc(email: String, password: String): AuthResult? {
+        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
-    suspend fun saveNote(title: String, content: String, imageUri: Uri, username: String) {
-        withContext(Dispatchers.IO) {
+
+    suspend fun saveNote(title: String, content: String, imageUri: Uri, username: String): Result {
+        return try {
+            // save image
             val filePath = storageReference
                 .child("notebook_images")
                 .child("my_image_${Timestamp.now().seconds}")
             filePath.putFile(imageUri).await()
 
-            notebookCollectionReference.add(
+            // save note
+            val docRef = notebookCollectionReference.add(
                 Note(
                     title,
                     content,
@@ -63,31 +81,49 @@ class FirebaseRepository() {
                     username
                 )
             ).await()
+
+            Result.Success(docRef)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
         }
     }
 
-    suspend fun loginUser(email: String, password: String) {
-        firebaseAuth.signInWithEmailAndPassword(email, password).await()
-        getUserData()
+    suspend fun loginUser(email: String, password: String): Result {
+        return try {
+            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            Result.Success(result)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
     }
 
-    private fun getUserData(): User? {
+    fun loadUserData() {
         var user: User? = null
-        firebaseAuth.currentUser?.let {
-            val userId = firebaseAuth.currentUser!!.uid
-            userCollectionReference
-                .whereEqualTo("userId", userId)
-                .addSnapshotListener { value, _ ->
-                    value?.forEach {
-                        if (it.exists()) {
-                            user = User(it.getString("username")!!, it.getString("userId")!!)
-                            userData.postValue(user!!)
-                        }
+        val userId = firebaseAuth.currentUser!!.uid
+        userCollectionReference
+            .whereEqualTo("userId", userId)
+            .addSnapshotListener { value, _ ->
+                value?.forEach {
+                    if (it.exists()) {
+                        user = User(it.getString("username")!!, it.getString("userId")!!)
+                        userData.postValue(user!!)
                     }
                 }
-        }
-        return user
+            }
     }
+
+    fun loadNotebookData() = flow<Result> {
+        val currentUser = firebaseAuth.currentUser!!.uid
+        val snapshot =
+            notebookCollectionReference
+                .whereEqualTo("userId", currentUser)
+                .orderBy("timeAdded", Query.Direction.DESCENDING)
+                .get().await()
+        val notes = snapshot.toObjects(Note::class.java)
+        emit(Result.Success(notes))
+    }.catch {
+        emit(Result.Error(it.message.toString()))
+    }.flowOn(Dispatchers.IO)
 
     fun signOut() {
         firebaseAuth.signOut()

@@ -1,9 +1,10 @@
-package com.astriex.reflection.ui.activities
+package com.astriex.reflection.ui.activities.intro
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.astriex.reflection.databinding.ActivityIntroBinding
+import com.astriex.reflection.ui.activities.login.LoginActivity
 
 class IntroActivity : AppCompatActivity() {
     private lateinit var bindingMain: ActivityIntroBinding
