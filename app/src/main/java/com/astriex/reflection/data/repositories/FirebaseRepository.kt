@@ -59,7 +59,6 @@ class FirebaseRepository() {
         return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
-
     suspend fun saveNote(title: String, content: String, imageUri: Uri, username: String): Result {
         return try {
             // save image
@@ -128,6 +127,30 @@ class FirebaseRepository() {
     }.catch {
         emit(Result.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
+
+    suspend fun updateNote(note: Note): Result {
+        return try {
+            val query = notebookCollectionReference
+                .whereEqualTo("imageUrl", note.imageUrl)
+                .get().await()
+
+            val res = query.documents.forEach {
+                it.reference.update(
+                    mapOf(
+                        "title" to note.title,
+                        "content" to note.content,
+                        "imageUrl" to note.imageUrl,
+                        "userId" to note.userId,
+                        "timeAdded" to Timestamp.now(),
+                        "username" to note.username
+                    )
+                ).await()
+            }
+            Result.Success(res)
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
+    }
 
     fun signOut() {
         firebaseAuth.signOut()

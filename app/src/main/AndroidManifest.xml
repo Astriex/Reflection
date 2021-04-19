@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Reflection">
-        <activity android:name=".ui.activities.notesList.NotesListActivity"></activity>
+        <activity android:name=".ui.activities.editNote.EditNoteActivity"></activity>
+        <activity android:name=".ui.activities.notesList.NotesListActivity" />
         <activity android:name=".ui.activities.postNote.PostNoteActivity" />
         <activity android:name=".ui.activities.register.CreateAccountActivity" />
         <activity android:name=".ui.activities.login.LoginActivity" />

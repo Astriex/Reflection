@@ -11,9 +11,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.adapters.NoteListAdapter
+import com.astriex.reflection.adapters.OnItemClickListener
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityNotesListBinding
+import com.astriex.reflection.ui.activities.editNote.EditNoteActivity
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
@@ -22,7 +24,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class NotesListActivity : AppCompatActivity() {
+class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityNotesListBinding
     private lateinit var viewModel: NotesListViewModel
     private lateinit var adapter: NoteListAdapter
@@ -92,7 +94,7 @@ class NotesListActivity : AppCompatActivity() {
     }
 
     private fun setupNotesList(notes: List<Note>) {
-        adapter = NoteListAdapter(this)
+        adapter = NoteListAdapter(this, this)
         binding.rvNotes.adapter = adapter
         adapter.setNotes(notes)
     }
@@ -123,6 +125,10 @@ class NotesListActivity : AppCompatActivity() {
         viewModel.signOut()
         startActivity(Intent(this, LoginActivity::class.java))
         finish()
+    }
+
+    override fun onitemClick(note: Note) {
+        startActivity(Intent(this, EditNoteActivity::class.java).putExtra("note", note))
     }
 
 }

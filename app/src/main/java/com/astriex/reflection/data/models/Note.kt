@@ -6,12 +6,12 @@ import com.google.firebase.Timestamp
 
 
 data class Note(
-    val title: String? = null,
-    val content: String? = null,
-    val imageUrl: String? = null,
-    val userId: String? = null,
-    val timeAdded: Timestamp? = null,
-    val username: String? = null
+    var title: String? = null,
+    var content: String? = null,
+    var imageUrl: String? = null,
+    var userId: String? = null,
+    var timeAdded: Timestamp? = null,
+    var username: String? = null
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString(),

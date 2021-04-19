@@ -36,7 +36,7 @@
         <ImageView
             android:id="@+id/ivNoteImage"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:background="@color/teal_200"
             android:cropToPadding="true"
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:text="Title"
+            android:text="@string/title_default_text"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
             android:paddingStart="10dp"
             android:paddingTop="15dp"
             android:paddingEnd="15dp"
-            android:text="Content"
+            android:text="@string/content_default_text"
             android:textSize="18sp"
             android:textStyle="normal" />
 
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
-            android:text="Date created"
+            android:text="@string/timestamp_default_text"
             android:textStyle="italic" />
 
     </LinearLayout>
