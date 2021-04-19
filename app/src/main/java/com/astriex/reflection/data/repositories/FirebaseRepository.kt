@@ -25,6 +25,7 @@ class FirebaseRepository() {
     private val db = FirebaseFirestore.getInstance()
     private val userCollectionReference = db.collection(Constants.USERS_COLLECTION)
     private val storageReference = FirebaseStorage.getInstance().reference
+    private val storageInstance = FirebaseStorage.getInstance()
     private val notebookCollectionReference = db.collection(Constants.NOTEBOOK_COLLECTION)
 
     val userData = MutableLiveData<User>()
@@ -154,6 +155,8 @@ class FirebaseRepository() {
 
     suspend fun deleteNote(note: Note): Result {
         return try {
+            storageInstance.getReferenceFromUrl(note.imageUrl!!).delete().await()
+
             notebookCollectionReference
                 .whereEqualTo("imageUrl", note.imageUrl)
                 .get()
