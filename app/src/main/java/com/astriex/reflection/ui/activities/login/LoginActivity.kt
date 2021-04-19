@@ -11,7 +11,6 @@ import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityLoginBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
-import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.ui.activities.register.CreateAccountActivity
 import com.astriex.reflection.util.Result
 import kotlinx.coroutines.CoroutineScope
@@ -47,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         }
         bindingLogin.btnLogin.setOnClickListener {
             getFields()
-            if(viewModel.isDataValid(email, password)) {
+            if (viewModel.isDataValid(email, password)) {
                 CoroutineScope(Dispatchers.Main).launch {
                     viewModel.loginUser(email, password)
                 }
@@ -61,7 +60,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleResult(data: Result) {
-        when(data) {
+        when (data) {
             is Result.Success -> {
                 startActivity(Intent(this, NotesListActivity::class.java))
                 finish()

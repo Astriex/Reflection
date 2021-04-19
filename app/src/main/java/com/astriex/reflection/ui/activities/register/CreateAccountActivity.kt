@@ -57,13 +57,17 @@ class CreateAccountActivity : AppCompatActivity() {
     }
 
     private fun handleResponse(data: Result) {
-        when(data) {
+        when (data) {
             is Result.Success -> {
-                if(data.data == true) {
+                if (data.data == true) {
                     Toast.makeText(this, "Account created successfully", Toast.LENGTH_LONG).show()
                     showNewNote()
                 } else {
-                    Toast.makeText(this, "Registration not successful, try again", Toast.LENGTH_LONG).show()
+                    Toast.makeText(
+                        this,
+                        "Registration not successful, try again",
+                        Toast.LENGTH_LONG
+                    ).show()
                 }
             }
             is Result.Error -> {

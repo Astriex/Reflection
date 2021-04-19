@@ -3,12 +3,11 @@ package com.astriex.reflection.data.models
 import android.os.Parcel
 import android.os.Parcelable
 
-data class User(val username: String = "username", val userId: String = "userId"): Parcelable {
+data class User(val username: String = "username", val userId: String = "userId") : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readString()!!,
         parcel.readString()!!
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(username)

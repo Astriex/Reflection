@@ -1,10 +1,10 @@
 package com.astriex.reflection.data.repositories
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.models.User
+import com.astriex.reflection.util.Constants
 import com.astriex.reflection.util.Result
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.AuthResult
@@ -22,14 +22,11 @@ import kotlinx.coroutines.tasks.await
 class FirebaseRepository() {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
-    private val userCollectionReference = db.collection("Users")
+    private val userCollectionReference = db.collection(Constants.USERS_COLLECTION)
     private val storageReference = FirebaseStorage.getInstance().reference
-    private val notebookCollectionReference = db.collection("Notebook")
+    private val notebookCollectionReference = db.collection(Constants.NOTEBOOK_COLLECTION)
 
     val userData = MutableLiveData<User>()
-    val _hasNotes = MutableLiveData<Boolean>(false)
-    val hasNotes: LiveData<Boolean>
-        get() = _hasNotes
 
     companion object {
         @Volatile
@@ -105,7 +102,10 @@ class FirebaseRepository() {
             .addSnapshotListener { value, _ ->
                 value?.forEach {
                     if (it.exists()) {
-                        user = User(it.getString("username")!!, it.getString("userId")!!)
+                        user = User(
+                            it.getString(Constants.USERNAME)!!,
+                            it.getString(Constants.USER_ID)!!
+                        )
                         userData.postValue(user!!)
                     }
                 }
@@ -116,7 +116,7 @@ class FirebaseRepository() {
         val currentUser = firebaseAuth.currentUser!!.uid
         val snapshot =
             notebookCollectionReference
-                .whereEqualTo("userId", currentUser)
+                .whereEqualTo(Constants.USER_ID, currentUser)
                 .orderBy("timeAdded", Query.Direction.DESCENDING)
                 .get().await()
         val notes = snapshot.toObjects(Note::class.java)

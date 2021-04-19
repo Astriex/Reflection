@@ -13,10 +13,10 @@ import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
+import com.astriex.reflection.util.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import com.astriex.reflection.util.Result
 
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
@@ -32,9 +32,10 @@ class PostNoteActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_note)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository.getInstance())).get(
-            PostNoteViewModel::class.java
-        )
+        viewModel =
+            ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository.getInstance())).get(
+                PostNoteViewModel::class.java
+            )
         binding.viewModel = viewModel
 
         setupViews()
@@ -49,7 +50,7 @@ class PostNoteActivity : AppCompatActivity() {
 
     fun saveNote(view: View) {
         getFields()
-        if(viewModel.isDataValid(title, content, imageUri)) {
+        if (viewModel.isDataValid(title, content, imageUri)) {
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.saveNote(title, content, imageUri, username)
             }
@@ -89,7 +90,7 @@ class PostNoteActivity : AppCompatActivity() {
     }
 
     private fun handleResponse(data: Result) {
-        when(data) {
+        when (data) {
             is Result.Success -> {
                 Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
                 startNotesListActivity()

@@ -2,7 +2,6 @@ package com.astriex.reflection.ui.activities.notesList
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -54,7 +53,7 @@ class NotesListActivity : AppCompatActivity() {
     private suspend fun loadNotes() {
         viewModel.loadNotes().collect { result ->
             when (result) {
-                is Result.Success ->  {
+                is Result.Success -> {
                     handleResponse(result)
                 }
                 is Result.Error -> {
@@ -65,7 +64,7 @@ class NotesListActivity : AppCompatActivity() {
     }
 
     private fun handleResponse(result: Result) {
-        when(result) {
+        when (result) {
             is Result.Success -> {
                 setNotesView()
                 setupNotesList(result.data as List<Note>)

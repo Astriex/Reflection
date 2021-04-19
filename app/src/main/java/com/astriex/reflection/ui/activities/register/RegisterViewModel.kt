@@ -7,7 +7,7 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
 import kotlinx.coroutines.launch
 
-class RegisterViewModel(val repository: FirebaseRepository): ViewModel() {
+class RegisterViewModel(val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     var result = MutableLiveData<Result>()
 

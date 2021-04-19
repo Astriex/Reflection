@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.models.User
 import com.astriex.reflection.data.repositories.FirebaseRepository
-import kotlinx.coroutines.launch
 import com.astriex.reflection.util.Result
+import kotlinx.coroutines.launch
 
 class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>(false)
@@ -28,17 +28,17 @@ class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel(
         }
     }
 
-    fun isDataValid(title: String,content: String, imageUri: Uri?): Boolean {
+    fun isDataValid(title: String, content: String, imageUri: Uri?): Boolean {
         var isValid = false
 
-        if(title.isNotEmpty() && content.isNotEmpty() && imageUri != null) {
+        if (title.isNotEmpty() && content.isNotEmpty() && imageUri != null) {
             isValid = true
         } else {
             isValid = false
-            if(title.isEmpty() || content.isEmpty()) {
+            if (title.isEmpty() || content.isEmpty()) {
                 message = "Fields cannot be empty"
             }
-            if(imageUri == null) {
+            if (imageUri == null) {
                 message = "Please select a photo"
             }
         }
