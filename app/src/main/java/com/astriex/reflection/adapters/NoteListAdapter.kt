@@ -1,6 +1,7 @@
 package com.astriex.reflection.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -32,13 +33,12 @@ class NoteListAdapter(private val context: Context) :
         holder.binding.apply {
             tvNoteTitle.text = note.title
             tvNoteContent.text = note.content
-
             Glide.with(context)
                 .load(note.imageUrl)
                 .placeholder(R.drawable.ic_image_placeholder)
                 .into(ivNoteImage)
-
             tvNoteTimestamp.text = getRelativeTimestamp(note.timeAdded!!)
+            tvUsername.text = note.username
         }
     }
 

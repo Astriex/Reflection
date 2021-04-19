@@ -36,7 +36,12 @@ class LoginActivity : AppCompatActivity() {
         )
         bindingLogin.viewModel = viewModel
 
+        setupActionbar()
         setupListeners()
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupListeners() {

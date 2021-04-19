@@ -37,7 +37,12 @@ class CreateAccountActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
 
+        setupActionbar()
         setupListeners()
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupListeners() {

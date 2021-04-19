@@ -38,12 +38,17 @@ class NotesListActivity : AppCompatActivity() {
         ).get(NotesListViewModel::class.java)
         binding.viewModel = viewModel
 
+        setupActionbar()
         setupViews()
 
         CoroutineScope(Dispatchers.Main).launch {
             loadNotes()
         }
 
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupViews() {

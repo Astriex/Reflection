@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_background"
+    android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
-    tools:context=".ui.activities.intro.IntroActivity"
-    android:gravity="center">
+    tools:context=".ui.activities.intro.IntroActivity">
 
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab_bold"
-        android:text="Reflect Journal"
+        android:text="Reflect Notebook"
         android:textSize="30sp" />
 
     <RelativeLayout
@@ -36,18 +37,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="What are you thinking?"
-                android:textSize="19sp"/>
+                android:textSize="19sp"
+                android:textStyle="italic" />
 
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
         android:text="get started"
-        android:textColor="@color/teal_200"
-        android:background="@android:color/transparent"/>
+        android:textColor="@color/limeGreen"
+        android:textSize="16sp" />
 
 </LinearLayout>

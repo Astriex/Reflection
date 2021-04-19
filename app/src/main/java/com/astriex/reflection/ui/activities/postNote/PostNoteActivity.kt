@@ -38,7 +38,12 @@ class PostNoteActivity : AppCompatActivity() {
             )
         binding.viewModel = viewModel
 
+        setupActionbar()
         setupViews()
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupViews() {

@@ -9,6 +9,7 @@ import com.astriex.reflection.util.Result
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
@@ -96,20 +97,23 @@ class FirebaseRepository() {
 
     fun loadUserData() {
         var user: User? = null
-        val userId = firebaseAuth.currentUser!!.uid
-        userCollectionReference
-            .whereEqualTo("userId", userId)
-            .addSnapshotListener { value, _ ->
-                value?.forEach {
-                    if (it.exists()) {
-                        user = User(
-                            it.getString(Constants.USERNAME)!!,
-                            it.getString(Constants.USER_ID)!!
-                        )
-                        userData.postValue(user!!)
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId != null) {
+            userCollectionReference
+                .whereEqualTo("userId", userId)
+                .addSnapshotListener { value, _ ->
+                    value?.forEach {
+                        if (it.exists()) {
+                            user = User(
+                                it.getString(Constants.USERNAME)!!,
+                                it.getString(Constants.USER_ID)!!
+                            )
+                            userData.postValue(user!!)
+                        }
                     }
                 }
-            }
+        }
+
     }
 
     fun loadNotebookData() = flow<Result> {
@@ -127,6 +131,11 @@ class FirebaseRepository() {
 
     fun signOut() {
         firebaseAuth.signOut()
+    }
+
+    fun getCurrentUser(): FirebaseUser? {
+        loadUserData()
+        return firebaseAuth.currentUser
     }
 
 }

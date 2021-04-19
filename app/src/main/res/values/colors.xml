@@ -7,4 +7,14 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    // gradient
+    <color name="gradientStartColor">#3a1c71</color>
+    <color name="gradientCenterColor">#d76d77</color>
+    <color name="gradientEndColor">#ffaf7b</color>
+
+    // custom app colors
+    <color name="limeGreen">#c0ca33</color>
+    <color name="yellow">#ffde03</color>
+
 </resources>

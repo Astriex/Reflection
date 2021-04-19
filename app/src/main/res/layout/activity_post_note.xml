@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
+
         <variable
             name="viewModel"
             type="com.astriex.reflection.ui.activities.postNote.PostNoteViewModel" />
@@ -13,6 +15,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/gradient_background"
         tools:context=".ui.activities.postNote.PostNoteActivity">
 
         <ImageView
@@ -35,6 +38,7 @@
             android:layout_marginStart="33dp"
             android:layout_marginBottom="4dp"
             android:text="username"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/design_default_color_primary"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -78,9 +82,10 @@
             android:layout_width="390dp"
             android:layout_height="46dp"
             android:layout_marginTop="24dp"
+            android:background="@drawable/input_outline"
             android:ems="10"
             android:hint="Title"
-            android:inputType="textPersonName"
+            android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
@@ -88,14 +93,18 @@
 
         <EditText
             android:id="@+id/etPostContent"
-            android:layout_width="387dp"
-            android:layout_height="48dp"
+            android:layout_width="384dp"
+            android:layout_height="127dp"
             android:layout_marginStart="14dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="10dp"
+            android:background="@drawable/input_outline"
             android:ems="10"
             android:hint="Your thoughts..."
-            android:inputType="textPersonName"
+            android:inputType="textMultiLine"
+            android:padding="15dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -114,14 +123,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etPostContent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             android:layout_width="378dp"
             android:layout_height="56dp"
             android:background="@android:color/transparent"
             android:onClick="saveNote"
             android:text="Save"
-            android:textColor="#03A9F4"
+            android:textColor="@color/limeGreen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.484"
