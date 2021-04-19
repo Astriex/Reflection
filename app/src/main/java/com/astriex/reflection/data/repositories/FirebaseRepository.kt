@@ -134,7 +134,7 @@ class FirebaseRepository() {
                 .whereEqualTo("imageUrl", note.imageUrl)
                 .get().await()
 
-            val res = query.documents.forEach {
+            query.documents.forEach {
                 it.reference.update(
                     mapOf(
                         "title" to note.title,
@@ -146,10 +146,26 @@ class FirebaseRepository() {
                     )
                 ).await()
             }
-            Result.Success(res)
+            Result.Success()
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }
+    }
+
+    suspend fun deleteNote(note: Note): Result {
+        return try {
+            notebookCollectionReference
+                .whereEqualTo("imageUrl", note.imageUrl)
+                .get()
+                .await()
+                .documents.forEach {
+                    it.reference.delete()
+                }
+            Result.Success()
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
+
     }
 
     fun signOut() {

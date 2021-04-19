@@ -13,12 +13,19 @@ import com.bumptech.glide.Glide
 import com.google.firebase.Timestamp
 
 interface OnItemClickListener {
-    fun onitemClick(note: Note)
+    fun onItemClick(note: Note)
 }
 
-class NoteListAdapter(private val context: Context, private val listener: OnItemClickListener) :
+interface OnItemSwipedListener {
+    fun deleteItem(note: Note)
+}
+
+class NoteListAdapter(
+    private val context: Context,
+    private val clickListener: OnItemClickListener
+) :
     RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
-    private var adapterNotes = mutableListOf<Note>()
+    var adapterNotes = mutableListOf<Note>()
 
     inner class NoteViewHolder(val binding: ItemNoteRowBinding) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
@@ -28,14 +35,16 @@ class NoteListAdapter(private val context: Context, private val listener: OnItem
 
         override fun onClick(v: View?) {
             val currentNote = adapterNotes[adapterPosition]
-            listener.onitemClick(Note(
-                currentNote.title,
-                currentNote.content,
-                currentNote.imageUrl,
-                currentNote.userId,
-                currentNote.timeAdded,
-                currentNote.username
-            ))
+            clickListener.onItemClick(
+                Note(
+                    currentNote.title,
+                    currentNote.content,
+                    currentNote.imageUrl,
+                    currentNote.userId,
+                    currentNote.timeAdded,
+                    currentNote.username
+                )
+            )
         }
     }
 

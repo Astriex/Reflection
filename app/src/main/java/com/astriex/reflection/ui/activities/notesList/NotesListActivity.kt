@@ -8,7 +8,10 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.astriex.reflection.R
 import com.astriex.reflection.adapters.NoteListAdapter
 import com.astriex.reflection.adapters.OnItemClickListener
@@ -19,6 +22,7 @@ import com.astriex.reflection.ui.activities.editNote.EditNoteActivity
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.SwipeToDeleteCallback
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -41,7 +45,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         binding.viewModel = viewModel
 
         setupActionbar()
-        setupViews()
+        setNoNotesView()
 
         CoroutineScope(Dispatchers.Main).launch {
             loadNotes()
@@ -53,15 +57,11 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         supportActionBar!!.elevation = 0F
     }
 
-    private fun setupViews() {
-        setNoNotesView()
-    }
-
     private suspend fun loadNotes() {
         viewModel.loadNotes().collect { result ->
             when (result) {
                 is Result.Success -> {
-                    handleResponse(result)
+                    handleDataLoadResponse(result)
                 }
                 is Result.Error -> {
                     binding.tvNoNotes.text = result.message
@@ -70,7 +70,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
-    private fun handleResponse(result: Result) {
+    private fun handleDataLoadResponse(result: Result) {
         when (result) {
             is Result.Success -> {
                 setNotesView()
@@ -97,6 +97,9 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         adapter = NoteListAdapter(this, this)
         binding.rvNotes.adapter = adapter
         adapter.setNotes(notes)
+
+        ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.rvNotes)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -127,8 +130,31 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         finish()
     }
 
-    override fun onitemClick(note: Note) {
+    override fun onItemClick(note: Note) {
         startActivity(Intent(this, EditNoteActivity::class.java).putExtra("note", note))
+    }
+
+   private val itemTouchHelperCallback = object : SwipeToDeleteCallback() {
+       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+           val position = viewHolder.adapterPosition
+           val note = adapter.adapterNotes[position]
+           viewModel.deleteNote(note)
+           viewModel.result.observe(this@NotesListActivity, Observer {
+               handleDeleteResponse(it, position)
+           })
+           adapter.notifyItemRemoved(position)
+       }
+
+   }
+
+    private fun handleDeleteResponse(result: Result, position: Int) {
+        when(result) {
+            is Result.Success -> {
+                adapter.adapterNotes.removeAt(position)
+                adapter.notifyItemRemoved(position)
+            }
+            is Result.Error -> Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
+        }
     }
 
 }
