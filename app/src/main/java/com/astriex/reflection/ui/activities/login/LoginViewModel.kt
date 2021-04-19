@@ -1,5 +1,6 @@
 package com.astriex.reflection.ui.activities.login
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -9,15 +10,21 @@ import kotlinx.coroutines.launch
 
 class LoginViewModel(private val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>(false)
-    val result = MutableLiveData<Result>()
+    var result = MutableLiveData<Result>()
     var message = String()
 
-    suspend fun loginUser(email: String, password: String) {
+    // prevent repeat of toast message
+    fun resetResponse() {
+        result = MutableLiveData<Result>()
+    }
+
+    fun loginUser(email: String, password: String): LiveData<Result> {
         viewModelScope.launch {
             isLoading.postValue(true)
             result.value = repository.loginUser(email, password)
             isLoading.postValue(false)
         }
+        return result
     }
 
     fun isDataValid(email: String, password: String): Boolean {

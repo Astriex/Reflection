@@ -87,8 +87,8 @@ class FirebaseRepository() {
 
     suspend fun loginUser(email: String, password: String): Result {
         return try {
-            val result = firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            Result.Success(result)
+            firebaseAuth.signInWithEmailAndPassword(email, password).await()
+            Result.Success()
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }

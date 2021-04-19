@@ -35,12 +35,14 @@ class IntroActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnStart.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
     }
 
     private fun userLoggedInCheck() {
         if (viewModel.getCurrentUser() != null) {
             startActivity(Intent(this, NotesListActivity::class.java))
+            finish()
         }
     }
 }

@@ -13,9 +13,6 @@ import com.astriex.reflection.databinding.ActivityLoginBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.ui.activities.register.CreateAccountActivity
 import com.astriex.reflection.util.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var bindingLogin: ActivityLoginBinding
@@ -52,26 +49,28 @@ class LoginActivity : AppCompatActivity() {
         bindingLogin.btnLogin.setOnClickListener {
             getFields()
             if (viewModel.isDataValid(email, password)) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    viewModel.loginUser(email, password)
-                }
-                viewModel.result.observe(this, Observer {
-                    handleResult(it)
-                })
+                login()
             } else {
                 Toast.makeText(this, viewModel.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun handleResult(data: Result) {
-        when (data) {
+    private fun login() {
+        viewModel.loginUser(email, password).observe(this, Observer { result ->
+            handleResult(result)
+            viewModel.resetResponse()
+        })
+    }
+
+    private fun handleResult(result: Result) {
+        when (result) {
             is Result.Success -> {
                 startActivity(Intent(this, NotesListActivity::class.java))
                 finish()
             }
             is Result.Error -> {
-                Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
