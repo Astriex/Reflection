@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 
 class NotesListViewModel(private val repository: FirebaseRepository) : ViewModel() {
@@ -26,6 +27,4 @@ class NotesListViewModel(private val repository: FirebaseRepository) : ViewModel
         }
         return result
     }
-
-
 }

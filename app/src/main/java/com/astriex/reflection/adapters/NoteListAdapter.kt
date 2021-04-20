@@ -16,10 +16,6 @@ interface OnItemClickListener {
     fun onItemClick(note: Note)
 }
 
-interface OnItemSwipedListener {
-    fun deleteItem(note: Note)
-}
-
 class NoteListAdapter(
     private val context: Context,
     private val clickListener: OnItemClickListener

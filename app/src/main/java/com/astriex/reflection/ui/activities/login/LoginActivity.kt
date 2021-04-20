@@ -44,7 +44,6 @@ class LoginActivity : AppCompatActivity() {
     private fun setupListeners() {
         bindingLogin.btnCreateAccount.setOnClickListener {
             launchActivity<CreateAccountActivity>()
-            finish()
         }
         bindingLogin.btnLogin.setOnClickListener {
             getFields()

@@ -42,12 +42,18 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         binding.viewModel = viewModel
 
         setupActionbar()
-        setNoNotesView()
+        setupListeners()
 
         CoroutineScope(Dispatchers.Main).launch {
             loadNotes()
         }
 
+    }
+
+    private fun setupListeners() {
+        binding.fabAdd.setOnClickListener {
+            startNewNote()
+        }
     }
 
     private fun setupActionbar() {
@@ -103,9 +109,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.actionAdd -> {
-                startNewNote()
-            }
             R.id.actionSignOut -> {
                 logout()
             }
@@ -114,8 +117,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun startNewNote() {
-        launchActivity<PostNoteActivity> { }
-        //finish()
+        launchActivity<PostNoteActivity>()
     }
 
     private fun logout() {
@@ -125,9 +127,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(note: Note) {
-        launchActivity<EditNoteActivity> {
-            putExtra("note", note)
-        }
+        launchActivity<EditNoteActivity> ("note", note)
     }
 
     private val itemTouchHelperCallback = object : SwipeToDeleteCallback() {

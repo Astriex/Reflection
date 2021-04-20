@@ -3,18 +3,20 @@ package com.astriex.reflection.util
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.Toast
+import com.astriex.reflection.data.models.Note
 
 fun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
 inline fun <reified T : Any> Activity.launchActivity(
-    extras: Bundle? = null,
-    noinline init: Intent.() -> Unit = {}
+    key: String? = null, value: Note? = null
 ) {
     val intent = Intent(this, T::class.java)
-    if (extras != null) {
-        startActivity(intent, extras)
+    if (value != null) {
+        intent.putExtra(key, value)
+        startActivity(intent)
     } else {
         startActivity(intent)
     }

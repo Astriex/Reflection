@@ -15,7 +15,6 @@ class EditNoteViewModel(private val repository: FirebaseRepository) : ViewModel(
     var message = String()
 
     init {
-        repository.loadUserData()
         repository.loadNotebookData()
     }
 

@@ -15,6 +15,7 @@ import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_edit_note.*
+import java.text.SimpleDateFormat
 
 class EditNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditNoteBinding
@@ -53,7 +54,7 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun handleResponse(result: Result) {
         when (result) {
-            is Result.Success -> launchActivity<NotesListActivity> { }
+            is Result.Success -> launchActivity<NotesListActivity>()
             is Result.Error -> toast(result.message)
         }
     }
@@ -62,13 +63,19 @@ class EditNoteActivity : AppCompatActivity() {
         receivedNote = intent.getParcelableExtra("note") as? Note
         binding.let {
             tvEditUsername.text = receivedNote!!.username
-            tvEditDate.text = receivedNote!!.timeAdded!!.toDate().toString()
+            tvEditDate.text = getFormatedDate()
             etEditTitle.setText(receivedNote!!.title)
             etEditContent.setText(receivedNote!!.content)
             Glide.with(this).load(receivedNote!!.imageUrl)
                 .placeholder(R.drawable.ic_image_placeholder)
                 .into(ivEditHeader)
         }
+    }
+
+    private fun getFormatedDate(): String {
+        val date = receivedNote!!.timeAdded!!.toDate()
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        return sdf.format(date)
     }
 
     private fun getFields() {
