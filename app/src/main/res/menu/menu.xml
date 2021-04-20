@@ -4,6 +4,6 @@
 
     <item
         android:id="@+id/actionSignOut"
-        android:title="Sign out"
+        android:title="@string/sign_out"
         app:showAsAction="never" />
 </menu>

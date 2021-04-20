@@ -20,7 +20,7 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 
-class FirebaseRepository() {
+class FirebaseRepository {
     private val firebaseAuth = FirebaseAuth.getInstance()
     private val db = FirebaseFirestore.getInstance()
     private val userCollectionReference = db.collection(Constants.USERS_COLLECTION)
@@ -48,11 +48,11 @@ class FirebaseRepository() {
         }
     }
 
-    suspend fun createAcc(email: String, password: String): AuthResult {
+    private suspend fun createAcc(email: String, password: String): AuthResult {
         return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
-    suspend fun saveUserToCollection(username: String): DocumentReference {
+    private suspend fun saveUserToCollection(username: String): DocumentReference {
         return userCollectionReference.add(User(username, firebaseAuth.currentUser!!.uid)).await()
     }
 

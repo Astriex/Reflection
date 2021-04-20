@@ -20,8 +20,7 @@ data class Note(
         parcel.readString(),
         parcel.readParcelable(Timestamp::class.java.classLoader),
         parcel.readString()
-    ) {
-    }
+    )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeString(title)

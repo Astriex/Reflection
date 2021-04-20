@@ -3,7 +3,6 @@ package com.astriex.reflection.ui.activities.editNote
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.models.Note
@@ -14,7 +13,6 @@ import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.activity_edit_note.*
 import java.text.SimpleDateFormat
 
 class EditNoteActivity : AppCompatActivity() {
@@ -46,7 +44,7 @@ class EditNoteActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        viewModel.updateNote(receivedNote!!).observe(this, Observer {
+        viewModel.updateNote(receivedNote!!).observe(this, {
             handleResponse(it)
             viewModel.resetResult()
         })
@@ -62,13 +60,13 @@ class EditNoteActivity : AppCompatActivity() {
     private fun setupEditNoteView() {
         receivedNote = intent.getParcelableExtra("note") as? Note
         binding.let {
-            tvEditUsername.text = receivedNote!!.username
-            tvEditDate.text = getFormatedDate()
-            etEditTitle.setText(receivedNote!!.title)
-            etEditContent.setText(receivedNote!!.content)
+            it.tvEditUsername.text = receivedNote!!.username
+            it.tvEditDate.text = getFormatedDate()
+            it.etEditTitle.setText(receivedNote!!.title)
+            it.etEditContent.setText(receivedNote!!.content)
             Glide.with(this).load(receivedNote!!.imageUrl)
                 .placeholder(R.drawable.ic_image_placeholder)
-                .into(ivEditHeader)
+                .into(it.ivEditHeader)
         }
     }
 

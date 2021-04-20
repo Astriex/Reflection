@@ -11,15 +11,13 @@
     tools:context=".ui.activities.intro.IntroActivity">
 
     <TextView
-        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab_bold"
-        android:text="Reflect Notebook"
+        android:text="@string/reflect_notebook"
         android:textSize="30sp" />
 
     <RelativeLayout
-        android:id="@+id/relativeLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
@@ -32,12 +30,11 @@
             app:cardUseCompatPadding="true">
 
             <TextView
-                android:id="@+id/tvMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto_slab_light"
-                android:text="What are you thinking?"
+                android:text="@string/what_are_you_thinking"
                 android:textSize="19sp"
                 android:textStyle="italic" />
 
@@ -50,7 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:text="get started"
+        android:text="@string/btn_get_started_text"
         android:textColor="@color/yellow"
         android:textSize="18sp" />
 

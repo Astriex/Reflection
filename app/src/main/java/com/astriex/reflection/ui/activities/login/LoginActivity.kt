@@ -3,7 +3,6 @@ package com.astriex.reflection.ui.activities.login
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
@@ -56,7 +55,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun login() {
-        viewModel.loginUser(email, password).observe(this, Observer { result ->
+        viewModel.loginUser(email, password).observe(this, { result ->
             handleResult(result)
             viewModel.resetResult()
         })

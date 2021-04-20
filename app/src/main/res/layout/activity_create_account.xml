@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -10,8 +11,7 @@
             type="com.astriex.reflection.ui.activities.register.RegisterViewModel" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_background"
@@ -39,17 +39,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Username"
+                    android:hint="@string/hint_username"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:paddingBottom="16dp" />
+                    android:paddingBottom="16dp"
+                    android:importantForAutofill="no" />
 
                 <AutoCompleteTextView
                     android:id="@+id/actvEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Email"
+                    android:hint="@string/hint_email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1" />
 
@@ -58,9 +59,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:hint="Password"
+                    android:hint="@string/hint_password"
                     android:inputType="textPassword"
-                    android:maxLines="1" />
+                    android:maxLines="1"
+                    android:importantForAutofill="no" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -76,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
-                android:text="Create account"
+                android:text="@string/btn_create_account_text"
                 android:textColor="@color/limeGreen"
                 android:textSize="18sp"
                 android:textStyle="bold" />

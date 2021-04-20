@@ -17,13 +17,13 @@
 
         <TextView
             android:id="@+id/tvUsername"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:fontFamily="@font/roboto_slab_bold"
             android:gravity="end"
             android:padding="3dp"
-            android:text="Username"
+            android:text="@string/hint_username"
             android:textColor="@color/gradientStartColor"
             android:textSize="17sp"
             android:textStyle="italic|bold" />
@@ -40,6 +40,7 @@
             android:layout_height="200dp"
             android:adjustViewBounds="true"
             android:background="@color/black"
+            android:contentDescription="@string/cont_desc_placeholder_note_image_background"
             android:cropToPadding="true"
             android:scaleType="fitXY"
             android:src="@android:color/transparent" />

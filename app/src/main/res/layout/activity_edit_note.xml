@@ -30,7 +30,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cont_desc_note_image" />
 
         <TextView
             android:id="@+id/tvEditUsername"
@@ -39,7 +40,7 @@
             android:layout_marginStart="33dp"
             android:layout_marginBottom="40dp"
             android:fontFamily="@font/roboto_slab_bold"
-            android:text="username"
+            android:text="@string/hint_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/browser_actions_text_color"
             android:textSize="16sp"
@@ -56,7 +57,7 @@
             android:layout_marginStart="33dp"
             android:layout_marginEnd="310dp"
             android:fontFamily="@font/roboto_italic"
-            android:text="Today"
+            android:text="@string/today_timestamp"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -74,12 +75,13 @@
             android:background="@drawable/input_outline"
             android:ems="10"
             android:fontFamily="@font/roboto_slab_bold"
-            android:hint="Title"
+            android:hint="@string/hint_title"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.411"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivEditHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/ivEditHeader"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/etEditContent"
@@ -90,7 +92,7 @@
             android:layout_marginEnd="10dp"
             android:background="@drawable/input_outline"
             android:fontFamily="@font/roboto_slab_light"
-            android:hint="Your thoughts..."
+            android:hint="@string/hint_content"
             android:inputType="textMultiLine"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -98,7 +100,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEditTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/etEditTitle"
+            android:importantForAutofill="no" />
 
         <ProgressBar
             android:id="@+id/postPorgressBar"
@@ -119,7 +122,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
-            android:text="Save"
+            android:text="@string/btn_save_text"
             android:textColor="@color/yellow"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

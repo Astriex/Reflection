@@ -11,7 +11,7 @@ import com.astriex.reflection.util.Result
 import kotlinx.coroutines.launch
 
 class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel() {
-    val isLoading = MutableLiveData<Boolean>(false)
+    val isLoading = MutableLiveData(false)
     val userData: LiveData<User> = repository.userData
     var result = MutableLiveData<Result>()
     var message = String()

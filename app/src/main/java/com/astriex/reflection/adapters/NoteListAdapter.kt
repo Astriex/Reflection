@@ -68,7 +68,7 @@ class NoteListAdapter(
     }
 
     private fun getRelativeTimestamp(timestamp: Timestamp): String {
-        return DateUtils.getRelativeTimeSpanString(timestamp.seconds.toLong() * 1000).toString()
+        return DateUtils.getRelativeTimeSpanString(timestamp.seconds * 1000).toString()
     }
 
     fun setNotes(notes: List<Note>) {

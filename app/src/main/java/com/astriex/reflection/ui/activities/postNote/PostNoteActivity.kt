@@ -6,12 +6,12 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
+import com.astriex.reflection.util.Constants.Companion.GALLERY_CODE
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
@@ -22,7 +22,6 @@ import kotlinx.coroutines.launch
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
     private lateinit var viewModel: PostNoteViewModel
-    private val GALLERY_CODE = 1
     private var imageUri: Uri? = null
     private lateinit var title: String
     private lateinit var content: String
@@ -48,7 +47,7 @@ class PostNoteActivity : AppCompatActivity() {
     }
 
     private fun setupViews() {
-        viewModel.userData.observe(this, Observer {
+        viewModel.userData.observe(this, {
             binding.tvPostUsername.text = it.username
             username = it.username
         })
@@ -60,7 +59,7 @@ class PostNoteActivity : AppCompatActivity() {
             CoroutineScope(Dispatchers.Main).launch {
                 viewModel.saveNote(title, content, imageUri, username)
             }
-            viewModel.result.observe(this, Observer {
+            viewModel.result.observe(this, {
                 handleResponse(it)
             })
         } else {

@@ -29,7 +29,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/cont_desc_note_image" />
 
         <TextView
             android:id="@+id/tvPostUsername"
@@ -38,7 +39,7 @@
             android:layout_marginStart="33dp"
             android:layout_marginBottom="4dp"
             android:fontFamily="@font/roboto_slab_bold"
-            android:text="username"
+            android:text="@string/hint_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
             android:textSize="16sp"
@@ -56,7 +57,7 @@
             android:layout_marginEnd="310dp"
             android:layout_marginBottom="9dp"
             android:fontFamily="@font/roboto_italic"
-            android:text="Today"
+            android:text="@string/today_timestamp"
             android:textColor="@color/black"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
@@ -76,7 +77,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@android:drawable/ic_menu_camera" />
+            app:srcCompat="@android:drawable/ic_menu_camera"
+            android:contentDescription="@string/cont_desc_add_photo_image" />
 
         <EditText
             android:id="@+id/etPostTitle"
@@ -86,12 +88,13 @@
             android:background="@drawable/input_outline"
             android:ems="10"
             android:fontFamily="@font/roboto_slab_bold"
-            android:hint="Title"
+            android:hint="@string/hint_title"
             android:inputType="text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.523"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/ivHeader"
+            android:importantForAutofill="no" />
 
         <EditText
             android:id="@+id/etPostContent"
@@ -103,7 +106,7 @@
             android:background="@drawable/input_outline"
             android:ems="10"
             android:fontFamily="@font/roboto_slab_light"
-            android:hint="Your thoughts..."
+            android:hint="@string/hint_your_thoughts"
             android:inputType="textMultiLine"
             android:padding="15dp"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
@@ -111,7 +114,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPostTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/etPostTitle"
+            android:importantForAutofill="no" />
 
         <ProgressBar
             android:id="@+id/postPorgressBar"
@@ -132,7 +136,7 @@
             android:layout_height="56dp"
             android:background="@android:color/transparent"
             android:onClick="saveNote"
-            android:text="Save"
+            android:text="@string/btn_save_text"
             android:textColor="@color/limeGreen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

@@ -40,7 +40,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.923"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="@string/cont_desc_fab_button" />
 
         <TextView
             android:id="@+id/tvNoNotes"
@@ -48,7 +49,7 @@
             android:layout_height="67dp"
             android:gravity="center"
             android:maxLines="20"
-            android:text="No Notes"
+            android:text="@string/no_notes_label"
             android:textSize="12sp"
             android:textStyle="bold"
             android:visibility="gone"

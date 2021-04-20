@@ -3,4 +3,24 @@
     <string name="timestamp_default_text">Date created</string>
     <string name="content_default_text">Content</string>
     <string name="title_default_text">Title</string>
+    <string name="hint_username">Username</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="btn_create_account_text">Create account</string>
+    <string name="cont_desc_note_image">Note image</string>
+    <string name="today_timestamp">Today</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_content">Your thoughts…</string>
+    <string name="btn_save_text">Save</string>
+    <string name="reflect_notebook">Reflect Notebook</string>
+    <string name="what_are_you_thinking">What are you thinking?</string>
+    <string name="btn_get_started_text">get started</string>
+    <string name="btn_login_text">Login</string>
+    <string name="or">Or</string>
+    <string name="cont_desc_fab_button">fab button</string>
+    <string name="no_notes_label">No Notes</string>
+    <string name="cont_desc_add_photo_image">add photo image</string>
+    <string name="hint_your_thoughts">Your thoughts…</string>
+    <string name="cont_desc_placeholder_note_image_background">placeholder note image background</string>
+    <string name="sign_out">Sign out</string>
 </resources>

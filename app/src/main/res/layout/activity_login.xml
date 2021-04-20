@@ -51,7 +51,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Email"
+                        android:hint="@string/hint_email"
                         android:inputType="textEmailAddress"
                         android:maxLines="1" />
 
@@ -60,9 +60,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:hint="Password"
+                        android:hint="@string/hint_password"
                         android:inputType="textPassword"
-                        android:maxLines="1" />
+                        android:maxLines="1"
+                        android:importantForAutofill="no" />
 
                 </LinearLayout>
 
@@ -75,7 +76,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@android:color/transparent"
-                android:text="Login"
+                android:text="@string/btn_login_text"
                 android:textColor="@color/yellow"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -85,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:gravity="center_horizontal"
-                android:text="Or"
+                android:text="@string/or"
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
@@ -95,7 +96,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@android:color/transparent"
-                android:text="Create account"
+                android:text="@string/btn_create_account_text"
                 android:textColor="@color/limeGreen"
                 android:textSize="18sp"
                 android:textStyle="bold" />

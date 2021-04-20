@@ -10,7 +10,7 @@ import com.astriex.reflection.util.Result
 import kotlinx.coroutines.launch
 
 class EditNoteViewModel(private val repository: FirebaseRepository) : ViewModel() {
-    val isLoading = MutableLiveData<Boolean>(false)
+    val isLoading = MutableLiveData(false)
     var result = MutableLiveData<Result>()
     var message = String()
 

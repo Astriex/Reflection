@@ -6,7 +6,6 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -134,7 +133,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
             val position = viewHolder.adapterPosition
             val note = adapter.adapterNotes[position]
-            viewModel.deleteNote(note).observe(this@NotesListActivity, Observer {
+            viewModel.deleteNote(note).observe(this@NotesListActivity, {
                 handleDeleteResponse(it, position)
                 viewModel.resetResult()
             })
