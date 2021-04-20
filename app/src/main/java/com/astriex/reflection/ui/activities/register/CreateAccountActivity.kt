@@ -5,16 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class CreateAccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateAccountBinding
@@ -34,7 +30,6 @@ class CreateAccountActivity : AppCompatActivity() {
         ).get(
             RegisterViewModel::class.java
         )
-
         binding.viewModel = viewModel
 
         setupActionbar()
@@ -48,40 +43,34 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnCreateAccount.setOnClickListener {
             getFieldData()
-            userRegistration()
+            if (viewModel.isDataValid(username, email, password)) {
+                registration()
+            } else {
+                Toast.makeText(this, viewModel.message.value, Toast.LENGTH_LONG).show()
+            }
         }
     }
 
-    private fun userRegistration() {
-        CoroutineScope(Dispatchers.Main).launch {
-            viewModel.registerUser(email, password, username)
-        }
-        viewModel.result.observe(this, Observer {
+    private fun registration() {
+        viewModel.registerUser(email, password, username).observe(this, {
             handleResponse(it)
+            viewModel.resetResult()
         })
     }
 
-    private fun handleResponse(data: Result) {
-        when (data) {
+    private fun handleResponse(result: Result) {
+        when (result) {
             is Result.Success -> {
-                if (data.data == true) {
-                    Toast.makeText(this, "Account created successfully", Toast.LENGTH_LONG).show()
-                    showNewNote()
-                } else {
-                    Toast.makeText(
-                        this,
-                        "Registration not successful, try again",
-                        Toast.LENGTH_LONG
-                    ).show()
-                }
+                Toast.makeText(this, "Account created successfully", Toast.LENGTH_LONG).show()
+                startNewNote()
             }
             is Result.Error -> {
-                Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    private fun showNewNote() {
+    private fun startNewNote() {
         startActivity(
             Intent(this, PostNoteActivity::class.java)
         )

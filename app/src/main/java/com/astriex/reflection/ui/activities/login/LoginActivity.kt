@@ -59,7 +59,7 @@ class LoginActivity : AppCompatActivity() {
     private fun login() {
         viewModel.loginUser(email, password).observe(this, Observer { result ->
             handleResult(result)
-            viewModel.resetResponse()
+            viewModel.resetResult()
         })
     }
 

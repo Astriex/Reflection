@@ -14,7 +14,7 @@ class LoginViewModel(private val repository: FirebaseRepository) : ViewModel() {
     var message = String()
 
     // prevent repeat of toast message
-    fun resetResponse() {
+    fun resetResult() {
         result = MutableLiveData<Result>()
     }
 

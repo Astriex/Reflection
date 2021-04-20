@@ -40,24 +40,20 @@ class FirebaseRepository() {
 
     suspend fun registerUser(email: String, password: String, username: String): Result {
         return try {
-            if (createAcc(email, password) != null &&
-                saveUserToFirestore(username) != null
-            ) {
-                Result.Success(true)
-            } else {
-                Result.Success(false)
-            }
+            createAcc(email, password)
+            saveUserToCollection(username)
+            Result.Success()
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }
     }
 
-    suspend fun saveUserToFirestore(username: String): DocumentReference? {
-        return userCollectionReference.add(User(username, firebaseAuth.currentUser!!.uid)).await()
+    suspend fun createAcc(email: String, password: String): AuthResult {
+        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
     }
 
-    suspend fun createAcc(email: String, password: String): AuthResult? {
-        return firebaseAuth.createUserWithEmailAndPassword(email, password).await()
+    suspend fun saveUserToCollection(username: String): DocumentReference {
+        return userCollectionReference.add(User(username, firebaseAuth.currentUser!!.uid)).await()
     }
 
     suspend fun saveNote(title: String, content: String, imageUri: Uri, username: String): Result {

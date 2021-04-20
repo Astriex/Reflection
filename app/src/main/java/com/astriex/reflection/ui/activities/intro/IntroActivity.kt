@@ -1,6 +1,5 @@
 package com.astriex.reflection.ui.activities.intro
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -8,6 +7,7 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityIntroBinding
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
+import com.astriex.reflection.util.launchActivity
 
 class IntroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntroBinding
@@ -34,14 +34,14 @@ class IntroActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnStart.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            launchActivity<LoginActivity>()
             finish()
         }
     }
 
     private fun userLoggedInCheck() {
         if (viewModel.getCurrentUser() != null) {
-            startActivity(Intent(this, NotesListActivity::class.java))
+            launchActivity<NotesListActivity>()
             finish()
         }
     }
