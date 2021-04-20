@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,8 +19,7 @@ import com.astriex.reflection.databinding.ActivityNotesListBinding
 import com.astriex.reflection.ui.activities.editNote.EditNoteActivity
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
-import com.astriex.reflection.util.Result
-import com.astriex.reflection.util.SwipeToDeleteCallback
+import com.astriex.reflection.util.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -61,36 +58,33 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         viewModel.loadNotes().collect { result ->
             when (result) {
                 is Result.Success -> {
-                    handleDataLoadResponse(result)
+                    showNotesView(result)
                 }
                 is Result.Error -> {
-                    binding.tvNoNotes.text = result.message
+                    showNoNotesView(result)
                 }
             }
         }
     }
 
-    private fun handleDataLoadResponse(result: Result) {
-        when (result) {
-            is Result.Success -> {
-                setNotesView()
-                setupNotesList(result.data as List<Note>)
-            }
-            is Result.Error -> {
-                Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
-                setNoNotesView()
-            }
-        }
+    private fun showNoNotesView(result: Result.Error) {
+        toast(result.message)
+        setNoNotesView()
+    }
+
+    private fun showNotesView(result: Result.Success) {
+        setNotesView()
+        setupNotesList(result.data as List<Note>)
     }
 
     private fun setNotesView() {
-        binding.rvNotes.visibility = View.VISIBLE
-        binding.tvNoNotes.visibility = View.INVISIBLE
+        binding.rvNotes.show()
+        binding.tvNoNotes.hide()
     }
 
     private fun setNoNotesView() {
-        binding.rvNotes.visibility = View.INVISIBLE
-        binding.tvNoNotes.visibility = View.VISIBLE
+        binding.rvNotes.hide()
+        binding.tvNoNotes.show()
     }
 
     private fun setupNotesList(notes: List<Note>) {
@@ -120,7 +114,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun startNewNote() {
-        startActivity(Intent(this, PostNoteActivity::class.java))
+        launchActivity<PostNoteActivity> { }
         //finish()
     }
 
@@ -131,29 +125,29 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(note: Note) {
-        startActivity(Intent(this, EditNoteActivity::class.java).putExtra("note", note))
+        launchActivity<EditNoteActivity> {
+            putExtra("note", note)
+        }
     }
 
-   private val itemTouchHelperCallback = object : SwipeToDeleteCallback() {
-       override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-           val position = viewHolder.adapterPosition
-           val note = adapter.adapterNotes[position]
-           viewModel.deleteNote(note)
-           viewModel.result.observe(this@NotesListActivity, Observer {
-               handleDeleteResponse(it, position)
-           })
-           adapter.notifyItemRemoved(position)
-       }
-
-   }
+    private val itemTouchHelperCallback = object : SwipeToDeleteCallback() {
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val position = viewHolder.adapterPosition
+            val note = adapter.adapterNotes[position]
+            viewModel.deleteNote(note).observe(this@NotesListActivity, Observer {
+                handleDeleteResponse(it, position)
+                viewModel.resetResult()
+            })
+        }
+    }
 
     private fun handleDeleteResponse(result: Result, position: Int) {
-        when(result) {
+        when (result) {
             is Result.Success -> {
                 adapter.adapterNotes.removeAt(position)
                 adapter.notifyItemRemoved(position)
             }
-            is Result.Error -> Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
+            is Result.Error -> toast(result.message)
         }
     }
 

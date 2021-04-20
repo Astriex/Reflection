@@ -1,8 +1,6 @@
 package com.astriex.reflection.ui.activities.login
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,6 +11,8 @@ import com.astriex.reflection.databinding.ActivityLoginBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.ui.activities.register.CreateAccountActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.launchActivity
+import com.astriex.reflection.util.toast
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var bindingLogin: ActivityLoginBinding
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         bindingLogin.btnCreateAccount.setOnClickListener {
-            startActivity(Intent(this, CreateAccountActivity::class.java))
+            launchActivity<CreateAccountActivity>()
             finish()
         }
         bindingLogin.btnLogin.setOnClickListener {
@@ -51,7 +51,7 @@ class LoginActivity : AppCompatActivity() {
             if (viewModel.isDataValid(email, password)) {
                 login()
             } else {
-                Toast.makeText(this, viewModel.message, Toast.LENGTH_SHORT).show()
+                toast(viewModel.message)
             }
         }
     }
@@ -66,11 +66,11 @@ class LoginActivity : AppCompatActivity() {
     private fun handleResult(result: Result) {
         when (result) {
             is Result.Success -> {
-                startActivity(Intent(this, NotesListActivity::class.java))
+                launchActivity<NotesListActivity>()
                 finish()
             }
             is Result.Error -> {
-                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                toast(result.message)
             }
         }
     }

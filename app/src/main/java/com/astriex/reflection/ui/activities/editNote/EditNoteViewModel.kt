@@ -1,5 +1,6 @@
 package com.astriex.reflection.ui.activities.editNote
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,12 +19,17 @@ class EditNoteViewModel(private val repository: FirebaseRepository) : ViewModel(
         repository.loadNotebookData()
     }
 
-    fun updateNote(note: Note) {
+    fun resetResult() {
+        result = MutableLiveData<Result>()
+    }
+
+    fun updateNote(note: Note): LiveData<Result> {
         viewModelScope.launch {
             isLoading.postValue(true)
             result.value = repository.updateNote(note)
             isLoading.postValue(false)
         }
+        return result
     }
 
     fun isDataValid(title: String, content: String): Boolean {

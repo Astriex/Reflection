@@ -1,8 +1,6 @@
 package com.astriex.reflection.ui.activities.editNote
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -13,11 +11,10 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityEditNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.launchActivity
+import com.astriex.reflection.util.toast
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.activity_edit_note.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class EditNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditNoteBinding
@@ -33,6 +30,7 @@ class EditNoteActivity : AppCompatActivity() {
                 EditNoteViewModel::class.java
             )
         binding.viewModel = viewModel
+
         setupEditNoteView()
         setupListeners()
     }
@@ -40,24 +38,23 @@ class EditNoteActivity : AppCompatActivity() {
     private fun setupListeners() {
         binding.btnPostSave.setOnClickListener {
             getFields()
-            if(viewModel.isDataValid(receivedNote!!.title!!, receivedNote!!.content!!)) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    viewModel.updateNote(receivedNote!!)
-                }
-                viewModel.result.observe(this, Observer {
-                    handleResponse(it)
-                })
+            if (viewModel.isDataValid(receivedNote!!.title!!, receivedNote!!.content!!)) {
+                update()
             }
-            viewModel.updateNote(receivedNote!!)
         }
     }
 
+    private fun update() {
+        viewModel.updateNote(receivedNote!!).observe(this, Observer {
+            handleResponse(it)
+            viewModel.resetResult()
+        })
+    }
+
     private fun handleResponse(result: Result) {
-        when(result) {
-            is Result.Success -> {
-                startActivity(Intent(this, NotesListActivity::class.java))
-            }
-            is Result.Error -> Toast.makeText(this, result.message, Toast.LENGTH_LONG).show()
+        when (result) {
+            is Result.Success -> launchActivity<NotesListActivity> { }
+            is Result.Error -> toast(result.message)
         }
     }
 
@@ -68,7 +65,8 @@ class EditNoteActivity : AppCompatActivity() {
             tvEditDate.text = receivedNote!!.timeAdded!!.toDate().toString()
             etEditTitle.setText(receivedNote!!.title)
             etEditContent.setText(receivedNote!!.content)
-            Glide.with(this).load(receivedNote!!.imageUrl).placeholder(R.drawable.ic_image_placeholder)
+            Glide.with(this).load(receivedNote!!.imageUrl)
+                .placeholder(R.drawable.ic_image_placeholder)
                 .into(ivEditHeader)
         }
     }

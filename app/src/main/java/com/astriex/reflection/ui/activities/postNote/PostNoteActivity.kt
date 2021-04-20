@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -14,6 +13,8 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.launchActivity
+import com.astriex.reflection.util.toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,12 +64,12 @@ class PostNoteActivity : AppCompatActivity() {
                 handleResponse(it)
             })
         } else {
-            Toast.makeText(this, viewModel.message, Toast.LENGTH_SHORT).show()
+            toast(viewModel.message)
         }
     }
 
     private fun startNotesListActivity() {
-        startActivity(Intent(this, NotesListActivity::class.java))
+        launchActivity<NotesListActivity>()
         finish()
     }
 
@@ -94,15 +95,14 @@ class PostNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun handleResponse(data: Result) {
-        when (data) {
+    private fun handleResponse(result: Result) {
+        when (result) {
             is Result.Success -> {
-                Toast.makeText(this, "Note saved", Toast.LENGTH_SHORT).show()
                 startNotesListActivity()
                 finish()
             }
             is Result.Error -> {
-                Toast.makeText(this, data.message, Toast.LENGTH_SHORT).show()
+                toast(result.message)
             }
         }
     }

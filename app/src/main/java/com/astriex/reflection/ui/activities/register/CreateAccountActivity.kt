@@ -1,8 +1,6 @@
 package com.astriex.reflection.ui.activities.register
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +9,8 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.launchActivity
+import com.astriex.reflection.util.toast
 
 class CreateAccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateAccountBinding
@@ -46,7 +46,7 @@ class CreateAccountActivity : AppCompatActivity() {
             if (viewModel.isDataValid(username, email, password)) {
                 registration()
             } else {
-                Toast.makeText(this, viewModel.message.value, Toast.LENGTH_LONG).show()
+                toast(viewModel.message.value!!)
             }
         }
     }
@@ -61,19 +61,17 @@ class CreateAccountActivity : AppCompatActivity() {
     private fun handleResponse(result: Result) {
         when (result) {
             is Result.Success -> {
-                Toast.makeText(this, "Account created successfully", Toast.LENGTH_LONG).show()
+                toast("Account created successfully")
                 startNewNote()
             }
             is Result.Error -> {
-                Toast.makeText(this, result.message, Toast.LENGTH_SHORT).show()
+                toast(result.message)
             }
         }
     }
 
     private fun startNewNote() {
-        startActivity(
-            Intent(this, PostNoteActivity::class.java)
-        )
+        launchActivity<PostNoteActivity>()
         finish()
     }
 
