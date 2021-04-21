@@ -12,12 +12,18 @@ import com.astriex.reflection.ui.activities.register.CreateAccountActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
     private lateinit var bindingLogin: ActivityLoginBinding
-    private lateinit var viewModel: LoginViewModel
     private lateinit var email: String
     private lateinit var password: String
+    private lateinit var viewModel: LoginViewModel
+
+    @Inject
+    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(
             this,
-            LoginViewModelFactory(FirebaseRepository.getInstance())
+            LoginViewModelFactory(repository)
         ).get(
             LoginViewModel::class.java
         )

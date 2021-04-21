@@ -6,9 +6,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class RegisterViewModel(val repository: FirebaseRepository) : ViewModel() {
+@HiltViewModel
+class RegisterViewModel @Inject constructor(val repository: FirebaseRepository) : ViewModel() {
     val isLoading = MutableLiveData<Boolean>()
     var result = MutableLiveData<Result>()
     var message = MutableLiveData<String>()

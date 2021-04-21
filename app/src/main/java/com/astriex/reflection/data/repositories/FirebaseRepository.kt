@@ -19,24 +19,20 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class FirebaseRepository {
-    private val firebaseAuth = FirebaseAuth.getInstance()
-    private val db = FirebaseFirestore.getInstance()
+@Singleton
+class FirebaseRepository @Inject constructor(
+    private val firebaseAuth: FirebaseAuth,
+    private val db: FirebaseFirestore,
+    private val storageInstance: FirebaseStorage
+) {
     private val userCollectionReference = db.collection(Constants.USERS_COLLECTION)
-    private val storageReference = FirebaseStorage.getInstance().reference
-    private val storageInstance = FirebaseStorage.getInstance()
+    private val storageReference = storageInstance.reference
     private val notebookCollectionReference = db.collection(Constants.NOTEBOOK_COLLECTION)
 
     val userData = MutableLiveData<User>()
-
-    companion object {
-        @Volatile
-        private var instance: FirebaseRepository? = null
-        fun getInstance(): FirebaseRepository {
-            return instance ?: FirebaseRepository().also { instance = it }
-        }
-    }
 
     suspend fun registerUser(email: String, password: String, username: String): Result {
         return try {

@@ -8,10 +8,16 @@ import com.astriex.reflection.databinding.ActivityIntroBinding
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.launchActivity
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class IntroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntroBinding
     private lateinit var viewModel: IntroViewModel
+
+    @Inject
+    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +25,7 @@ class IntroActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel =
-            ViewModelProvider(this, IntroViewModelFactory(FirebaseRepository.getInstance())).get(
+            ViewModelProvider(this, IntroViewModelFactory(repository)).get(
                 IntroViewModel::class.java
             )
 

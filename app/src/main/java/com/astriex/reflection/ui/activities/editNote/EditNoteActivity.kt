@@ -1,6 +1,5 @@
 package com.astriex.reflection.ui.activities.editNote
 
-import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -15,19 +14,25 @@ import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import com.bumptech.glide.Glide
+import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class EditNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditNoteBinding
     private lateinit var viewModel: EditNoteViewModel
     private var receivedNote: Note? = null
+
+    @Inject
+    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_note)
 
         viewModel =
-            ViewModelProvider(this, EditNoteViewModelFactory(FirebaseRepository.getInstance())).get(
+            ViewModelProvider(this, EditNoteViewModelFactory(repository)).get(
                 EditNoteViewModel::class.java
             )
         binding.viewModel = viewModel
@@ -38,7 +43,7 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnPostSave.setOnClickListener {
-            if(isConnected()) {
+            if (isConnected()) {
                 getFields()
                 if (viewModel.isDataValid(receivedNote!!.title!!, receivedNote!!.content!!)) {
                     update()

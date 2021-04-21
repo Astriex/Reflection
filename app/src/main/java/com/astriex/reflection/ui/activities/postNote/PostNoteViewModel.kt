@@ -8,9 +8,13 @@ import androidx.lifecycle.viewModelScope
 import com.astriex.reflection.data.models.User
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class PostNoteViewModel(private val repository: FirebaseRepository) : ViewModel() {
+@HiltViewModel
+class PostNoteViewModel @Inject constructor(private val repository: FirebaseRepository) :
+    ViewModel() {
     val isLoading = MutableLiveData(false)
     val userData: LiveData<User> = repository.userData
     var result = MutableLiveData<Result>()

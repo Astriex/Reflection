@@ -16,10 +16,13 @@ import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
     private lateinit var viewModel: PostNoteViewModel
@@ -28,13 +31,16 @@ class PostNoteActivity : AppCompatActivity() {
     private lateinit var content: String
     private lateinit var username: String
 
+    @Inject
+    lateinit var repository: FirebaseRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_note)
         binding.lifecycleOwner = this
 
         viewModel =
-            ViewModelProvider(this, PostNoteViewModelFactory(FirebaseRepository.getInstance())).get(
+            ViewModelProvider(this, PostNoteViewModelFactory(repository)).get(
                 PostNoteViewModel::class.java
             )
         binding.viewModel = viewModel
@@ -55,7 +61,7 @@ class PostNoteActivity : AppCompatActivity() {
     }
 
     fun saveNote(view: View) {
-        if(isConnected()) {
+        if (isConnected()) {
             getFields()
             if (viewModel.isDataValid(title, content, imageUri)) {
                 CoroutineScope(Dispatchers.Main).launch {

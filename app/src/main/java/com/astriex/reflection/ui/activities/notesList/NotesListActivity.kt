@@ -1,8 +1,6 @@
 package com.astriex.reflection.ui.activities.notesList
 
 import android.content.Intent
-import android.net.ConnectivityManager
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -21,16 +19,21 @@ import com.astriex.reflection.ui.activities.editNote.EditNoteActivity
 import com.astriex.reflection.ui.activities.login.LoginActivity
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityNotesListBinding
-    private lateinit var viewModel: NotesListViewModel
     private lateinit var adapter: NoteListAdapter
+    private lateinit var viewModel: NotesListViewModel
+
+    @Inject
+    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +42,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
 
         viewModel = ViewModelProvider(
             this,
-            NotesListViewModelFactory(FirebaseRepository.getInstance())
+            NotesListViewModelFactory(repository)
         ).get(NotesListViewModel::class.java)
         binding.viewModel = viewModel
 
