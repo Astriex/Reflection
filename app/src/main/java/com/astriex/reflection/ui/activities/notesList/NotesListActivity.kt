@@ -10,8 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.astriex.reflection.R
-import com.astriex.reflection.adapters.NoteListAdapter
-import com.astriex.reflection.adapters.OnItemClickListener
+import com.astriex.reflection.data.adapters.NoteListAdapter
+import com.astriex.reflection.data.adapters.OnItemClickListener
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityNotesListBinding

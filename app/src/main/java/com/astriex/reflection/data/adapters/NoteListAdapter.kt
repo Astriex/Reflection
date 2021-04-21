@@ -1,4 +1,4 @@
-package com.astriex.reflection.adapters
+package com.astriex.reflection.data.adapters
 
 import android.content.Context
 import android.text.format.DateUtils
