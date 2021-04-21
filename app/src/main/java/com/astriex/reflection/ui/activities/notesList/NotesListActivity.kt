@@ -1,6 +1,8 @@
 package com.astriex.reflection.ui.activities.notesList
 
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -23,6 +25,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+
 
 class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityNotesListBinding
@@ -98,7 +101,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         adapter.setNotes(notes)
 
         ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(binding.rvNotes)
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -126,7 +128,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     override fun onItemClick(note: Note) {
-        launchActivity<EditNoteActivity> ("note", note)
+        launchActivity<EditNoteActivity>("note", note)
     }
 
     private val itemTouchHelperCallback = object : SwipeToDeleteCallback() {

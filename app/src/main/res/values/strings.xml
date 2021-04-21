@@ -23,4 +23,5 @@
     <string name="hint_your_thoughts">Your thoughts…</string>
     <string name="cont_desc_placeholder_note_image_background">placeholder note image background</string>
     <string name="sign_out">Sign out</string>
+    <string name="no_network_warning">Not Connected. Please turn on WIFI or mobile data</string>
 </resources>

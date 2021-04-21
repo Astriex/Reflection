@@ -1,5 +1,6 @@
 package com.astriex.reflection.ui.activities.editNote
 
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -10,6 +11,7 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityEditNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import com.bumptech.glide.Glide
@@ -36,9 +38,13 @@ class EditNoteActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         binding.btnPostSave.setOnClickListener {
-            getFields()
-            if (viewModel.isDataValid(receivedNote!!.title!!, receivedNote!!.content!!)) {
-                update()
+            if(isConnected()) {
+                getFields()
+                if (viewModel.isDataValid(receivedNote!!.title!!, receivedNote!!.content!!)) {
+                    update()
+                }
+            } else {
+                toast(getString(R.string.no_network_warning))
             }
         }
     }

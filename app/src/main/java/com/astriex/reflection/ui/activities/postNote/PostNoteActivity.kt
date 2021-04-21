@@ -13,6 +13,7 @@ import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Constants.Companion.GALLERY_CODE
 import com.astriex.reflection.util.Result
+import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import kotlinx.coroutines.CoroutineScope
@@ -54,16 +55,20 @@ class PostNoteActivity : AppCompatActivity() {
     }
 
     fun saveNote(view: View) {
-        getFields()
-        if (viewModel.isDataValid(title, content, imageUri)) {
-            CoroutineScope(Dispatchers.Main).launch {
-                viewModel.saveNote(title, content, imageUri, username)
+        if(isConnected()) {
+            getFields()
+            if (viewModel.isDataValid(title, content, imageUri)) {
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.saveNote(title, content, imageUri, username)
+                }
+                viewModel.result.observe(this, {
+                    handleResponse(it)
+                })
+            } else {
+                toast(viewModel.message)
             }
-            viewModel.result.observe(this, {
-                handleResponse(it)
-            })
         } else {
-            toast(viewModel.message)
+            toast(getString(R.string.no_network_warning))
         }
     }
 

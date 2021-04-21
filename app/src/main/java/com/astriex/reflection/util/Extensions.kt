@@ -2,8 +2,11 @@ package com.astriex.reflection.util
 
 import android.app.Activity
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.os.Build
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.astriex.reflection.data.models.Note
 
 fun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
@@ -26,5 +29,20 @@ fun View.show() {
 
 fun View.hide() {
     this.visibility = View.INVISIBLE
+}
+
+fun Activity.isConnected(): Boolean {
+    var status = false
+    val conManager = getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        if (conManager != null && conManager.activeNetwork != null && conManager.getNetworkCapabilities(conManager.activeNetwork) != null) {
+            status = true
+        }
+    } else {
+        if(conManager.activeNetwork != null) {
+            status = true
+        }
+    }
+    return status
 }
 
