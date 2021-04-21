@@ -25,7 +25,7 @@ import javax.inject.Singleton
 @Singleton
 class FirebaseRepository @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
-    private val db: FirebaseFirestore,
+    db: FirebaseFirestore,
     private val storageInstance: FirebaseStorage
 ) {
     private val userCollectionReference = db.collection(Constants.USERS_COLLECTION)
