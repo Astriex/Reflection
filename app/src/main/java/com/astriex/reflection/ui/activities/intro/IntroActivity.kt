@@ -1,8 +1,8 @@
 package com.astriex.reflection.ui.activities.intro
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityIntroBinding
 import com.astriex.reflection.ui.activities.login.LoginActivity
@@ -14,7 +14,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class IntroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntroBinding
-    private lateinit var viewModel: IntroViewModel
+    private val viewModel by viewModels<IntroViewModel>()
 
     @Inject
     lateinit var repository: FirebaseRepository
@@ -23,11 +23,6 @@ class IntroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        viewModel =
-            ViewModelProvider(this, IntroViewModelFactory(repository)).get(
-                IntroViewModel::class.java
-            )
 
         setupActionbar()
         setupListeners()

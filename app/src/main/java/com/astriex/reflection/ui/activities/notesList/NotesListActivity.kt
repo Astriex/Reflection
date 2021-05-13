@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.astriex.reflection.R
@@ -30,7 +30,7 @@ import javax.inject.Inject
 class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityNotesListBinding
     private lateinit var adapter: NoteListAdapter
-    private lateinit var viewModel: NotesListViewModel
+    private val viewModel by viewModels<NotesListViewModel>()
 
     @Inject
     lateinit var repository: FirebaseRepository
@@ -40,10 +40,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_notes_list)
         binding.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(
-            this,
-            NotesListViewModelFactory(repository)
-        ).get(NotesListViewModel::class.java)
         binding.viewModel = viewModel
 
         setupActionbar()

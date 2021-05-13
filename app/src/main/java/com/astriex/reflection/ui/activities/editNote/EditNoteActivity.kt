@@ -1,9 +1,9 @@
 package com.astriex.reflection.ui.activities.editNote
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.repositories.FirebaseRepository
@@ -21,7 +21,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class EditNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEditNoteBinding
-    private lateinit var viewModel: EditNoteViewModel
+    private val viewModel by viewModels<EditNoteViewModel>()
     private var receivedNote: Note? = null
 
     @Inject
@@ -31,10 +31,6 @@ class EditNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_note)
 
-        viewModel =
-            ViewModelProvider(this, EditNoteViewModelFactory(repository)).get(
-                EditNoteViewModel::class.java
-            )
         binding.viewModel = viewModel
 
         setupEditNoteView()

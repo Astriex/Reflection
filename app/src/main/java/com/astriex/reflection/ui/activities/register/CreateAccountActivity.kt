@@ -1,9 +1,9 @@
 package com.astriex.reflection.ui.activities.register
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
@@ -17,7 +17,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CreateAccountActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCreateAccountBinding
-    private lateinit var viewModel: RegisterViewModel
+    private val viewModel by viewModels<RegisterViewModel>()
     private lateinit var username: String
     private lateinit var email: String
     private lateinit var password: String
@@ -29,13 +29,6 @@ class CreateAccountActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_create_account)
         binding.lifecycleOwner = this
-
-        viewModel = ViewModelProvider(
-            this,
-            RegisterViewModelFactory(repository)
-        ).get(
-            RegisterViewModel::class.java
-        )
 
         binding.viewModel = viewModel
 

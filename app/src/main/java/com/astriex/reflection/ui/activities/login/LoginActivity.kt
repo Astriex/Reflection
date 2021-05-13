@@ -1,9 +1,9 @@
 package com.astriex.reflection.ui.activities.login
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityLoginBinding
@@ -20,7 +20,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var bindingLogin: ActivityLoginBinding
     private lateinit var email: String
     private lateinit var password: String
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel by viewModels<LoginViewModel>()
 
     @Inject
     lateinit var repository: FirebaseRepository
@@ -30,12 +30,6 @@ class LoginActivity : AppCompatActivity() {
         bindingLogin = DataBindingUtil.setContentView(this, R.layout.activity_login)
         bindingLogin.lifecycleOwner = this
 
-        viewModel = ViewModelProvider(
-            this,
-            LoginViewModelFactory(repository)
-        ).get(
-            LoginViewModel::class.java
-        )
         bindingLogin.viewModel = viewModel
 
         setupActionbar()

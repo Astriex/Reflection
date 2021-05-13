@@ -4,9 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModelProvider
 import com.astriex.reflection.R
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
@@ -25,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PostNoteActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPostNoteBinding
-    private lateinit var viewModel: PostNoteViewModel
+    private val viewModel by viewModels<PostNoteViewModel>()
     private var imageUri: Uri? = null
     private lateinit var title: String
     private lateinit var content: String
@@ -39,10 +39,6 @@ class PostNoteActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_note)
         binding.lifecycleOwner = this
 
-        viewModel =
-            ViewModelProvider(this, PostNoteViewModelFactory(repository)).get(
-                PostNoteViewModel::class.java
-            )
         binding.viewModel = viewModel
 
         setupActionbar()
