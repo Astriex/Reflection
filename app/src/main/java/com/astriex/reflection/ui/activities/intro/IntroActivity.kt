@@ -16,9 +16,6 @@ class IntroActivity : AppCompatActivity() {
     private lateinit var binding: ActivityIntroBinding
     private val viewModel by viewModels<IntroViewModel>()
 
-    @Inject
-    lateinit var repository: FirebaseRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityIntroBinding.inflate(layoutInflater)

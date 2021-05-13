@@ -22,9 +22,6 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var password: String
     private val viewModel by viewModels<LoginViewModel>()
 
-    @Inject
-    lateinit var repository: FirebaseRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         bindingLogin = DataBindingUtil.setContentView(this, R.layout.activity_login)

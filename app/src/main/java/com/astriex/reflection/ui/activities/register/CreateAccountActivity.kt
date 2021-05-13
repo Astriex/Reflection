@@ -5,14 +5,12 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.astriex.reflection.R
-import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityCreateAccountBinding
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateAccountActivity : AppCompatActivity() {
@@ -21,9 +19,6 @@ class CreateAccountActivity : AppCompatActivity() {
     private lateinit var username: String
     private lateinit var email: String
     private lateinit var password: String
-
-    @Inject
-    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

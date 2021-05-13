@@ -13,7 +13,6 @@ import com.astriex.reflection.R
 import com.astriex.reflection.data.adapters.NoteListAdapter
 import com.astriex.reflection.data.adapters.OnItemClickListener
 import com.astriex.reflection.data.models.Note
-import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityNotesListBinding
 import com.astriex.reflection.ui.activities.editNote.EditNoteActivity
 import com.astriex.reflection.ui.activities.login.LoginActivity
@@ -24,16 +23,12 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     private lateinit var binding: ActivityNotesListBinding
     private lateinit var adapter: NoteListAdapter
     private val viewModel by viewModels<NotesListViewModel>()
-
-    @Inject
-    lateinit var repository: FirebaseRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
