@@ -16,9 +16,9 @@ class RegisterViewModel @Inject constructor(val repository: FirebaseRepository) 
     var result = MutableLiveData<Result>()
     var message = MutableLiveData<String>()
 
+    // prevent repeat of toast message
     fun resetResult() {
         result = MutableLiveData<Result>()
-        message = MutableLiveData<String>()
     }
 
     fun registerUser(email: String, password: String, username: String): LiveData<Result> {
@@ -33,7 +33,7 @@ class RegisterViewModel @Inject constructor(val repository: FirebaseRepository) 
     fun isDataValid(username: String, email: String, password: String): Boolean {
         var isValid = false
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
             message.value = "Fields cannot be empty"
         } else {
             isValid = true

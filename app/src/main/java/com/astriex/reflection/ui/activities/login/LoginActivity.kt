@@ -5,15 +5,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.astriex.reflection.R
-import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.databinding.ActivityLoginBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
-import com.astriex.reflection.ui.activities.register.CreateAccountActivity
+import com.astriex.reflection.ui.activities.register.RegisterActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.toast
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity() {
@@ -39,10 +37,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun setupListeners() {
         bindingLogin.btnCreateAccount.setOnClickListener {
-            launchActivity<CreateAccountActivity>()
+            launchActivity<RegisterActivity>()
         }
         bindingLogin.btnLogin.setOnClickListener {
-            getFields()
+            getFieldData()
             if (viewModel.isDataValid(email, password)) {
                 login()
             } else {
@@ -70,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFields() {
+    private fun getFieldData() {
         email = bindingLogin.actEmail.text.toString().trim()
         password = bindingLogin.etPassword.text.toString().trim()
     }

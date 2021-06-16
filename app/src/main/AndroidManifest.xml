@@ -23,7 +23,7 @@
             android:name=".ui.activities.postNote.PostNoteActivity"
             android:parentActivityName=".ui.activities.notesList.NotesListActivity" />
         <activity
-            android:name=".ui.activities.register.CreateAccountActivity"
+            android:name=".ui.activities.register.RegisterActivity"
             android:parentActivityName=".ui.activities.login.LoginActivity" />
         <activity android:name=".ui.activities.login.LoginActivity" />
         <activity android:name=".ui.activities.intro.IntroActivity">

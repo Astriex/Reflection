@@ -5,7 +5,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.astriex.reflection.R
-import com.astriex.reflection.databinding.ActivityCreateAccountBinding
+import com.astriex.reflection.databinding.ActivityRegisterBinding
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
@@ -13,8 +13,8 @@ import com.astriex.reflection.util.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CreateAccountActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityCreateAccountBinding
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityRegisterBinding
     private val viewModel by viewModels<RegisterViewModel>()
     private lateinit var username: String
     private lateinit var email: String
@@ -22,7 +22,7 @@ class CreateAccountActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_create_account)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
@@ -39,16 +39,16 @@ class CreateAccountActivity : AppCompatActivity() {
         binding.btnCreateAccount.setOnClickListener {
             getFieldData()
             if (viewModel.isDataValid(username, email, password)) {
-                registration()
+                register()
             } else {
                 toast(viewModel.message.value!!)
             }
         }
     }
 
-    private fun registration() {
-        viewModel.registerUser(email, password, username).observe(this, {
-            handleResponse(it)
+    private fun register() {
+        viewModel.registerUser(email, password, username).observe(this, { result ->
+            handleResponse(result)
             viewModel.resetResult()
         })
     }
