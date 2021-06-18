@@ -12,7 +12,7 @@
     <string name="hint_title">Title</string>
     <string name="hint_content">Your thoughts…</string>
     <string name="btn_save_text">Save</string>
-    <string name="reflect_notebook">Reflect Notebook</string>
+    <string name="reflect_notebook">Notebook of Reflections</string>
     <string name="what_are_you_thinking">What are you thinking?</string>
     <string name="btn_get_started_text">get started</string>
     <string name="btn_login_text">Login</string>
