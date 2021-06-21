@@ -28,8 +28,13 @@ class EditNoteActivity : AppCompatActivity() {
 
         binding.viewModel = viewModel
 
+        setupActionbar()
         setupEditNoteView()
         setupListeners()
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupListeners() {
