@@ -24,7 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         setupActionbar()

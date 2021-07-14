@@ -7,6 +7,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
 import com.astriex.reflection.R
 import com.astriex.reflection.databinding.ActivityPostNoteBinding
 import com.astriex.reflection.ui.activities.notesList.NotesListActivity
@@ -33,7 +34,6 @@ class PostNoteActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_post_note)
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         setupActionbar()
