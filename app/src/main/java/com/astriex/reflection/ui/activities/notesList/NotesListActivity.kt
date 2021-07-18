@@ -34,7 +34,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_notes_list)
         binding.lifecycleOwner = this
-
         binding.viewModel = viewModel
 
         setupActionbar()
@@ -43,7 +42,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         CoroutineScope(Dispatchers.Main).launch {
             loadNotes()
         }
-
     }
 
     private fun setupListeners() {
@@ -145,5 +143,4 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
             is Result.Error -> toast(result.message)
         }
     }
-
 }

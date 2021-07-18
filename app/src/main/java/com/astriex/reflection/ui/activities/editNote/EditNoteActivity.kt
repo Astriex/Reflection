@@ -1,5 +1,6 @@
 package com.astriex.reflection.ui.activities.editNote
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -25,7 +26,6 @@ class EditNoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_note)
-
         binding.viewModel = viewModel
 
         setupActionbar()
@@ -68,7 +68,7 @@ class EditNoteActivity : AppCompatActivity() {
         receivedNote = intent.getParcelableExtra("note") as? Note
         binding.let {
             it.tvEditUsername.text = receivedNote!!.username
-            it.tvEditDate.text = getFormatedDate()
+            it.tvEditDate.text = getFormattedDate()
             it.etEditTitle.setText(receivedNote!!.title)
             it.etEditContent.setText(receivedNote!!.content)
             Glide.with(this).load(receivedNote!!.imageUrl)
@@ -77,7 +77,8 @@ class EditNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFormatedDate(): String {
+    @SuppressLint("SimpleDateFormat")
+    private fun getFormattedDate(): String {
         val date = receivedNote!!.timeAdded!!.toDate()
         val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
         return sdf.format(date)
