@@ -39,6 +39,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         setupActionbar()
         setupListeners()
 
+        setNoNotesView()
         CoroutineScope(Dispatchers.Main).launch {
             loadNotes()
         }
@@ -58,7 +59,9 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         viewModel.loadNotes().collect { result ->
             when (result) {
                 is Result.Success -> {
-                    showNotesView(result)
+                    if((result.data as List<*>).isEmpty()) {
+                        showNotesView(result)
+                    }
                 }
                 is Result.Error -> {
                     showNoNotesView(result)
@@ -139,6 +142,9 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
             is Result.Success -> {
                 adapter.adapterNotes.removeAt(position)
                 adapter.notifyItemRemoved(position)
+                if(adapter.adapterNotes.isEmpty()) {
+                    setNoNotesView()
+                }
             }
             is Result.Error -> toast(result.message)
         }

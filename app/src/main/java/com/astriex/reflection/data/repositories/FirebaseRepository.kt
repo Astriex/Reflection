@@ -116,7 +116,7 @@ class FirebaseRepository @Inject constructor(
                 .orderBy("timeAdded", Query.Direction.DESCENDING)
                 .get().await()
         val notes = snapshot.toObjects(Note::class.java)
-        emit(Result.Success(notes))
+        emit(Result.Success(data = notes))
     }.catch {
         emit(Result.Error(it.message.toString()))
     }.flowOn(Dispatchers.IO)
