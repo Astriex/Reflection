@@ -51,8 +51,8 @@ class EditNoteActivity : AppCompatActivity() {
     }
 
     private fun update() {
-        viewModel.updateNote(receivedNote!!).observe(this, {
-            handleResponse(it)
+        viewModel.updateNote(receivedNote!!).observe(this, { result ->
+            handleResponse(result)
             viewModel.resetResult()
         })
     }
