@@ -19,8 +19,7 @@ interface OnItemClickListener {
 class NoteListAdapter(
     private val context: Context,
     private val clickListener: OnItemClickListener
-) :
-    RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
+) : RecyclerView.Adapter<NoteListAdapter.NoteViewHolder>() {
     var adapterNotes = mutableListOf<Note>()
 
     inner class NoteViewHolder(val binding: ItemNoteRowBinding) :
