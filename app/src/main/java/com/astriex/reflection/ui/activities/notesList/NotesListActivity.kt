@@ -59,7 +59,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         viewModel.loadNotes().collect { result ->
             when (result) {
                 is Result.Success -> {
-                    if((result.data as List<*>).isEmpty()) {
+                    if((result.data as List<*>).isNotEmpty()) {
                         showNotesView(result)
                     }
                 }
