@@ -35,11 +35,14 @@ fun Activity.isConnected(): Boolean {
     var status = false
     val conManager = getSystemService(AppCompatActivity.CONNECTIVITY_SERVICE) as ConnectivityManager
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-        if (conManager != null && conManager.activeNetwork != null && conManager.getNetworkCapabilities(conManager.activeNetwork) != null) {
+        if (conManager != null && conManager.activeNetwork != null && conManager.getNetworkCapabilities(
+                conManager.activeNetwork
+            ) != null
+        ) {
             status = true
         }
     } else {
-        if(conManager.activeNetwork != null) {
+        if (conManager.activeNetwork != null) {
             status = true
         }
     }
