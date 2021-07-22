@@ -168,7 +168,7 @@ class FirebaseRepository @Inject constructor(
     }
 
     fun getCurrentUser(): FirebaseUser? {
-        loadUserData()
+        //loadUserData()
         return firebaseAuth.currentUser
     }
 
