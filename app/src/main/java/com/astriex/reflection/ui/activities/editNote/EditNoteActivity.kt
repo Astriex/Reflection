@@ -12,7 +12,7 @@ import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
-import com.astriex.reflection.util.toast
+import com.astriex.reflection.util.snackbar
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -45,7 +45,7 @@ class EditNoteActivity : AppCompatActivity() {
                     update()
                 }
             } else {
-                toast(getString(R.string.no_network_warning))
+                snackbar(getString(R.string.no_network_warning))
             }
         }
     }
@@ -60,7 +60,7 @@ class EditNoteActivity : AppCompatActivity() {
     private fun handleResponse(result: Result) {
         when (result) {
             is Result.Success -> launchActivity<NotesListActivity>()
-            is Result.Error -> toast(result.message)
+            is Result.Error -> snackbar(result.message)
         }
     }
 

@@ -1,7 +1,6 @@
 package com.astriex.reflection.ui.activities.postNote
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
 import android.view.View
@@ -15,7 +14,7 @@ import com.astriex.reflection.util.Constants.Companion.GALLERY_CODE
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.isConnected
 import com.astriex.reflection.util.launchActivity
-import com.astriex.reflection.util.toast
+import com.astriex.reflection.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -62,10 +61,10 @@ class PostNoteActivity : AppCompatActivity() {
                     handleResponse(it)
                 })
             } else {
-                toast(viewModel.message)
+                snackbar(viewModel.message)
             }
         } else {
-            toast(getString(R.string.no_network_warning))
+            snackbar(getString(R.string.no_network_warning))
         }
     }
 
@@ -103,7 +102,7 @@ class PostNoteActivity : AppCompatActivity() {
                 finish()
             }
             is Result.Error -> {
-                toast(result.message)
+                snackbar(result.message)
             }
         }
     }

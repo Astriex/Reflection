@@ -10,7 +10,7 @@ import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.ui.activities.register.RegisterActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
-import com.astriex.reflection.util.toast
+import com.astriex.reflection.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +43,7 @@ class LoginActivity : AppCompatActivity() {
             if (viewModel.isDataValid(email, password)) {
                 login()
             } else {
-                toast(viewModel.message)
+                snackbar(viewModel.message)
             }
         }
     }
@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
                 finish()
             }
             is Result.Error -> {
-                toast(result.message)
+                snackbar(result.message)
             }
         }
     }

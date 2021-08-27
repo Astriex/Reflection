@@ -9,7 +9,7 @@ import com.astriex.reflection.databinding.ActivityRegisterBinding
 import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
-import com.astriex.reflection.util.toast
+import com.astriex.reflection.util.snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -40,7 +40,7 @@ class RegisterActivity : AppCompatActivity() {
             if (viewModel.isDataValid(username, email, password)) {
                 register()
             } else {
-                toast(viewModel.message.value!!)
+                snackbar(viewModel.message.value!!)
             }
         }
     }
@@ -55,11 +55,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun handleResponse(result: Result) {
         when (result) {
             is Result.Success -> {
-                toast("Account created successfully")
+                snackbar("Account created successfully")
                 startNewNote()
             }
             is Result.Error -> {
-                toast(result.message)
+                snackbar(result.message)
             }
         }
     }

@@ -1,16 +1,13 @@
 package com.astriex.reflection.ui.activities.notesList
 
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.astriex.reflection.R
 import com.astriex.reflection.data.adapters.NoteListAdapter
@@ -74,7 +71,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun showNoNotesView(result: Result.Error) {
-        toast(result.message)
+        snackbar(result.message)
         setNoNotesView()
     }
 
@@ -149,7 +146,7 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
                     setNoNotesView()
                 }
             }
-            is Result.Error -> toast(result.message)
+            is Result.Error -> snackbar(result.message)
         }
     }
 }

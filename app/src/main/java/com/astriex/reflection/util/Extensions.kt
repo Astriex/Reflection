@@ -5,11 +5,12 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.os.Build
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.astriex.reflection.data.models.Note
+import com.google.android.material.snackbar.Snackbar
 
-fun Activity.toast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+fun Activity.snackbar(message: String) =
+    Snackbar.make(this.window.decorView.findViewById(android.R.id.content), message, Snackbar.LENGTH_LONG).show()
 
 inline fun <reified T : Any> Activity.launchActivity(
     key: String? = null, value: Note? = null
