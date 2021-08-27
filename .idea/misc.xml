@@ -5,6 +5,24 @@
       <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
     </configurations>
   </component>
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/drawable/input_outline.xml" value="0.23796296296296296" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/activity_edit_note.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/activity_notes_list.xml" value="0.13125" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/activity_post_note.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/item_note_row.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_edit_note.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_intro.xml" value="0.2" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_login.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_notes_list.xml" value="0.2351851851851852" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_post_note.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_register.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/item_note_row.xml" value="0.264" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

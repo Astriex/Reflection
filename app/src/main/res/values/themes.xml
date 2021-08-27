@@ -2,21 +2,28 @@
     <!-- Base application theme. -->
     <style name="Theme.Reflection" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/gradientEndColor</item>
-        <item name="colorPrimaryVariant">@color/gradientEndColor</item>
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorPrimaryVariant">@color/primaryVariantColor</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/yellow</item>
-        <item name="colorSecondaryVariant">@color/limeGreen</item>
+        <item name="colorSecondary">@color/secondaryColor</item>
+        <item name="colorSecondaryVariant">@color/secondaryVariantColor</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
-        <item name="android:textAppearanceButton">@style/TextAppearance.AppCompat.Button.Custom</item>
+    </style>
+    
+    <style name="BaseOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="strokeColor">@color/white</item>
     </style>
 
-    <style name="TextAppearance.AppCompat.Button.Custom">
-        <item name="android:textColor">@color/yellow</item>
+    <style name="SpecialOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">@color/secondaryColor</item>
+        <item name="android:textSize">18sp</item>
+        <item name="strokeColor">@color/secondaryColor</item>
     </style>
 
 </resources>

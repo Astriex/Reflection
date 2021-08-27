@@ -4,16 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_background"
+    android:background="@color/primaryColor"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="15dp"
     tools:context=".ui.activities.intro.IntroActivity">
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_slab_bold"
+        android:textColor="@color/secondaryColor"
         android:text="@string/reflect_notebook"
         android:textSize="30sp" />
 
@@ -22,33 +23,31 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal">
 
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="100dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
             app:cardUseCompatPadding="true">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textview.MaterialTextView
+                android:layout_width="219dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/roboto_slab_light"
                 android:text="@string/what_are_you_thinking"
-                android:textSize="19sp"
+                android:textSize="18sp"
                 android:textStyle="italic" />
 
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
     </RelativeLayout>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/btnStart"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
         android:text="@string/btn_get_started_text"
-        android:textColor="@color/yellow"
-        android:textSize="18sp" />
+        style="@style/BaseOutlinedButton"/>
 
 </LinearLayout>

@@ -9,107 +9,117 @@
 
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.activities.editNote.EditNoteViewModel" />
+            type="com.astriex.reflection.ui.activities.postNote.PostNoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="10dp"
+        android:padding="8dp"
         android:scrollbars="vertical"
         tools:context=".ui.activities.postNote.PostNoteActivity">
 
         <ImageView
-            android:id="@+id/ivEditHeader"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
+            android:id="@+id/ivHeader"
+            android:layout_width="336dp"
+            android:layout_height="302dp"
             android:contentDescription="@string/cont_desc_note_image"
-            android:scaleType="fitXY"
             android:src="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_image_placeholder" />
+            tools:layout_editor_absoluteY="8dp" />
+
+        <ImageView
+            android:id="@+id/ivAddPhoto"
+            android:layout_width="98dp"
+            android:layout_height="79dp"
+            android:contentDescription="@string/cont_desc_add_photo_image"
+            android:onClick="getImage"
+            app:layout_constraintBottom_toBottomOf="@id/ivHeader"
+            app:layout_constraintEnd_toEndOf="@+id/ivHeader"
+            app:layout_constraintStart_toStartOf="@+id/ivHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivHeader"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvEditUsername"
+            android:id="@+id/tvPostUsername"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEditHeader"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/tvPostDate"
+            app:layout_constraintStart_toStartOf="@+id/ivHeader" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvEditDate"
+            android:id="@+id/tvPostDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginEnd="310dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEditUsername" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+            app:layout_constraintStart_toStartOf="@+id/tvPostUsername" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilTitle"
-            android:layout_width="match_parent"
+            android:id="@+id/textInputLayout10"
+            android:layout_width="363dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:importantForAutofill="no"
+            android:textColorHint="@color/black"
+            android:layout_marginStart="8dp"
             app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivEditHeader">
+            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivHeader">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEditTitle"
+                android:id="@+id/etPostTitle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/hint_title"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:padding="5dp" />
+                android:padding="15dp" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tilContent"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            app:hintEnabled="false"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/postProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilTitle">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="10dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout8"
+            android:layout_width="363dp"
+            android:layout_height="200dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:importantForAutofill="no"
+            android:textColorHint="@color/black"
+            app:hintEnabled="false"
+            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10"
+            tools:ignore="NotSibling">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etEditContent"
+                android:id="@+id/etPostContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_light"
                 android:gravity="start|top"
@@ -121,32 +131,19 @@
                 android:scrollbars="vertical"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
                 android:textSize="20sp" />
-
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.progressindicator.CircularProgressIndicator
-            android:id="@+id/postProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="364dp"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE, default=gone}"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.474"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilContent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
-            android:layout_width="match_parent"
+            android:layout_width="320dp"
             android:layout_height="56dp"
-            android:layout_margin="15dp"
-            android:layout_marginBottom="10dp"
+            android:onClick="saveNote"
             android:text="@string/btn_save_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilContent" />
+            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -14,29 +15,37 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/gradient_background"
+        android:background="@color/primaryColor"
+        android:padding="20dp"
+        android:scrollbars="vertical"
         tools:context=".ui.activities.postNote.PostNoteActivity">
 
         <ImageView
             android:id="@+id/ivHeader"
             android:layout_width="394dp"
             android:layout_height="229dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginEnd="8dp"
+            android:contentDescription="@string/cont_desc_note_image"
             android:src="@android:color/transparent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/cont_desc_note_image" />
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
+        <ImageView
+            android:id="@+id/ivAddPhoto"
+            android:layout_width="98dp"
+            android:layout_height="79dp"
+            android:contentDescription="@string/cont_desc_add_photo_image"
+            android:onClick="getImage"
+            app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/ivHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivHeader"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostUsername"
             android:layout_width="130dp"
             android:layout_height="35dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginBottom="4dp"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
@@ -48,13 +57,10 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginEnd="310dp"
-            android:layout_marginBottom="9dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
@@ -64,85 +70,85 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <ImageView
-            android:id="@+id/ivAddPhoto"
-            android:layout_width="98dp"
-            android:layout_height="79dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:onClick="getImage"
-            app:layout_constraintBottom_toTopOf="@+id/tvPostUsername"
+            android:importantForAutofill="no"
+            android:textColorHint="@color/black"
+            app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@android:drawable/ic_menu_camera"
-            android:contentDescription="@string/cont_desc_add_photo_image" />
+            app:layout_constraintTop_toBottomOf="@+id/ivHeader">
 
-        <EditText
-            android:id="@+id/etPostTitle"
-            android:layout_width="390dp"
-            android:layout_height="46dp"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/input_outline"
-            android:ems="10"
-            android:fontFamily="@font/roboto_slab_bold"
-            android:hint="@string/hint_title"
-            android:inputType="text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.523"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivHeader"
-            android:importantForAutofill="no" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPostTitle"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="24dp"
+                android:ems="10"
+                android:fontFamily="@font/roboto_slab_bold"
+                android:hint="@string/hint_title"
+                android:importantForAutofill="no"
+                android:inputType="text"
+                android:padding="15dp" />
 
-        <EditText
-            android:id="@+id/etPostContent"
-            android:layout_width="384dp"
-            android:layout_height="127dp"
-            android:layout_marginStart="14dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="10dp"
-            android:background="@drawable/input_outline"
-            android:ems="10"
-            android:fontFamily="@font/roboto_slab_light"
-            android:hint="@string/hint_your_thoughts"
-            android:inputType="textMultiLine"
-            android:padding="15dp"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPostTitle"
-            android:importantForAutofill="no" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <ProgressBar
-            android:id="@+id/postPorgressBar"
-            style="?android:attr/progressBarStyleLarge"
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/postProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="364dp"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE, default=gone}"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etPostContent" />
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout8"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:importantForAutofill="no"
+            android:textColorHint="@color/black"
+            app:hintEnabled="false"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10"
+            app:layout_constraintBottom_toTopOf="@+id/btnPostSave"
+            tools:ignore="NotSibling">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPostContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:ems="10"
+                android:fontFamily="@font/roboto_slab_light"
+                android:gravity="start|top"
+                android:hint="@string/hint_your_thoughts"
+                android:importantForAutofill="no"
+                android:inputType="textMultiLine"
+                android:maxLines="20"
+                android:padding="15dp"
+                android:scrollbars="vertical"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                android:textSize="20sp" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
-            android:layout_width="378dp"
-            android:layout_height="56dp"
-            android:background="@android:color/transparent"
+            style="@style/SpecialOutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
             android:onClick="saveNote"
             android:text="@string/btn_save_text"
-            android:textColor="@color/limeGreen"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.484"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postPorgressBar"
-            app:layout_constraintVertical_bias="0.923" />
+            app:layout_constraintStart_toStartOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

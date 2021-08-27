@@ -16,74 +16,64 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="10dp"
+        android:padding="8dp"
         android:scrollbars="vertical"
         tools:context=".ui.activities.postNote.PostNoteActivity">
 
         <ImageView
             android:id="@+id/ivEditHeader"
-            android:layout_width="match_parent"
-            android:layout_height="230dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="15dp"
+            android:layout_width="336dp"
+            android:layout_height="302dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:contentDescription="@string/cont_desc_note_image"
             android:scaleType="fitXY"
             android:src="@android:color/transparent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_image_placeholder" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditUsername"
-            android:layout_width="130dp"
-            android:layout_height="35dp"
-            android:layout_marginStart="33dp"
-            android:layout_marginBottom="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEditHeader"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/tvEditDate"
+            app:layout_constraintStart_toStartOf="@+id/ivEditHeader" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="33dp"
-            android:layout_marginEnd="310dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEditUsername" />
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ivEditHeader"
+            app:layout_constraintStart_toStartOf="@+id/tvEditUsername" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilTitle"
-            android:layout_width="match_parent"
+            android:layout_width="363dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="5dp"
+            android:gravity="end"
             app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivEditHeader">
+            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
+            app:layout_constraintTop_toTopOf="@+id/ivEditHeader">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditTitle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
@@ -96,11 +86,11 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilContent"
-            android:layout_width="match_parent"
+            android:layout_width="363dp"
             android:layout_height="200dp"
+            android:gravity="end"
             app:hintEnabled="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
             app:layout_constraintTop_toBottomOf="@+id/tilTitle">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -126,27 +116,25 @@
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/postProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="364dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE, default=gone}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.474"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tilContent" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
-            android:layout_width="match_parent"
+            android:layout_width="310dp"
             android:layout_height="56dp"
-            android:layout_margin="15dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginStart="12dp"
             android:text="@string/btn_save_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
+            app:layout_constraintStart_toStartOf="@+id/tilContent"
             app:layout_constraintTop_toBottomOf="@+id/tilContent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

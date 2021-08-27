@@ -12,7 +12,10 @@
     <color name="gradientEndColor">#ffaf7b</color>
 
     // custom app colors
-    <color name="limeGreen">#c0ca33</color>
-    <color name="yellow">#ffde03</color>
+    <color name="primaryColor">#009688</color>
+    <color name="primaryVariantColor">#00796B</color>
+    <color name="secondaryColor">#FFC107</color>
+    <color name="secondaryVariantColor">#c79100</color>
+    <color name="imageHeaderColor">#B2DFDB</color>
 
 </resources>
