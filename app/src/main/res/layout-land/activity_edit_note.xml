@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -22,59 +21,60 @@
 
         <ImageView
             android:id="@+id/ivEditHeader"
-            android:layout_width="336dp"
-            android:layout_height="302dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
             android:contentDescription="@string/cont_desc_note_image"
             android:scaleType="fitXY"
             android:src="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@id/guidelineEditNoteContentBottom_land"
+            app:layout_constraintEnd_toStartOf="@id/guidelineEditNoteScreenSplit_land"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_image_placeholder" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditUsername"
-            android:layout_width="wrap_content"
+            style="@style/AutoSizeTextViewBigger"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
-            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvEditDate"
-            app:layout_constraintStart_toStartOf="@+id/ivEditHeader" />
+            app:layout_constraintEnd_toStartOf="@id/guidelineEditNoteScreenSplit_land"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditDate"
+            style="@style/AutoSizeTextViewSmaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEditHeader"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvEditUsername" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilTitle"
-            android:layout_width="363dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:gravity="end"
             app:hintEnabled="false"
-            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
-            app:layout_constraintTop_toTopOf="@+id/ivEditHeader">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineEditNoteScreenSplit_land"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditTitle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginStart="14dp"
-                android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/hint_title"
@@ -86,20 +86,21 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilContent"
-            android:layout_width="363dp"
-            android:layout_height="200dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
             android:gravity="end"
             app:hintEnabled="false"
-            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
+            app:layout_constraintBottom_toTopOf="@id/guidelineEditNoteContentBottom_land"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineEditNoteScreenSplit_land"
             app:layout_constraintTop_toBottomOf="@+id/tilTitle">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditContent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="14dp"
-                android:layout_marginTop="11dp"
-                android:layout_marginEnd="10dp"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_light"
                 android:gravity="start|top"
@@ -127,13 +128,27 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
-            android:layout_width="310dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="12dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
             android:text="@string/btn_save_text"
-            app:layout_constraintLeft_toRightOf="@+id/ivEditHeader"
-            app:layout_constraintStart_toStartOf="@+id/tilContent"
-            app:layout_constraintTop_toBottomOf="@+id/tilContent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelineEditNoteScreenSplit_land"
+            app:layout_constraintTop_toBottomOf="@id/guidelineEditNoteContentBottom_land" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEditNoteScreenSplit_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineEditNoteContentBottom_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

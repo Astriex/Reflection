@@ -20,12 +20,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNotes"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineListEnd"
+            app:layout_constraintStart_toStartOf="@id/guidelineListStart"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_note_row" />
 
@@ -44,12 +44,11 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvNoNotes"
-            android:layout_width="271dp"
-            android:layout_height="67dp"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            style="@style/AutoSizeTextViewSmaller"
             android:gravity="center"
-            android:maxLines="20"
             android:text="@string/no_notes_label"
-            android:textSize="30sp"
             android:textColor="@color/white"
             android:textStyle="bold|italic"
             android:visibility="gone"
@@ -57,7 +56,21 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:visibility="visible"/>
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineListStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineListEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

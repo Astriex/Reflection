@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -22,12 +21,15 @@
 
         <ImageView
             android:id="@+id/ivHeader"
-            android:layout_width="336dp"
-            android:layout_height="302dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
             android:contentDescription="@string/cont_desc_note_image"
             android:src="@android:color/transparent"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinePostContentBottom_land"
+            app:layout_constraintEnd_toStartOf="@id/guidelinePostNoteScreenSplit_land"
             app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="8dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/ivAddPhoto"
@@ -43,45 +45,45 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostUsername"
-            android:layout_width="130dp"
-            android:layout_height="35dp"
+            style="@style/AutoSizeTextViewBigger"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline1"
             android:textColor="@color/black"
-            android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvPostDate"
-            app:layout_constraintStart_toStartOf="@+id/ivHeader" />
+            app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostDate"
+            style="@style/AutoSizeTextViewSmaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/ivHeader"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvPostUsername" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout10"
-            android:layout_width="363dp"
-            android:layout_height="wrap_content"
+            android:id="@+id/tilPostTitle_land"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginStart="16dp"
             android:importantForAutofill="no"
             android:textColorHint="@color/black"
-            android:layout_marginStart="8dp"
             app:hintEnabled="false"
-            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
-            app:layout_constraintTop_toTopOf="@+id/ivHeader">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelinePostNoteScreenSplit_land"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPostTitle"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="match_parent"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/hint_title"
@@ -104,16 +106,19 @@
             tools:layout_editor_absoluteY="10dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout8"
-            android:layout_width="363dp"
-            android:layout_height="200dp"
-            android:layout_marginStart="8dp"
+            android:id="@+id/tilPostContent_land"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"
             android:importantForAutofill="no"
             android:textColorHint="@color/black"
             app:hintEnabled="false"
-            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout10"
+            app:layout_constraintBottom_toTopOf="@id/guidelinePostContentBottom_land"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelinePostNoteScreenSplit_land"
+            app:layout_constraintTop_toBottomOf="@+id/tilPostTitle_land"
             tools:ignore="NotSibling">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -136,13 +141,29 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
-            android:layout_width="320dp"
-            android:layout_height="56dp"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:onClick="saveNote"
             android:text="@string/btn_save_text"
-            app:layout_constraintLeft_toRightOf="@+id/ivHeader"
-            app:layout_constraintStart_toStartOf="@+id/textInputLayout8"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayout8" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/guidelinePostNoteScreenSplit_land"
+            app:layout_constraintTop_toBottomOf="@id/guidelinePostContentBottom_land" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePostNoteScreenSplit_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.45" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinePostContentBottom_land"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

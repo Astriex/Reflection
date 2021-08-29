@@ -16,14 +16,41 @@
     
     <style name="BaseOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">18sp</item>
+        <item name="autoSizeMinTextSize">18sp</item>
+        <item name="autoSizeMaxTextSize">68sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="autoSizeTextType">uniform</item>
         <item name="strokeColor">@color/white</item>
     </style>
 
     <style name="SpecialOutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textColor">@color/secondaryColor</item>
-        <item name="android:textSize">18sp</item>
+        <item name="autoSizeMinTextSize">18sp</item>
+        <item name="autoSizeMaxTextSize">68sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="autoSizeTextType">uniform</item>
         <item name="strokeColor">@color/secondaryColor</item>
+    </style>
+
+    <style name="AutoSizeTextViewRegular" parent="Widget.MaterialComponents.TextView">
+        <item name="autoSizeMinTextSize">16sp</item>
+        <item name="autoSizeMaxTextSize">48sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="autoSizeTextType">uniform</item>
+    </style>
+
+    <style name="AutoSizeTextViewBigger" parent="Widget.MaterialComponents.TextView">
+        <item name="autoSizeMinTextSize">18sp</item>
+        <item name="autoSizeMaxTextSize">50sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="autoSizeTextType">uniform</item>
+    </style>
+
+    <style name="AutoSizeTextViewSmaller" parent="Widget.MaterialComponents.TextView">
+        <item name="autoSizeMinTextSize">14sp</item>
+        <item name="autoSizeMaxTextSize">46sp</item>
+        <item name="android:autoSizeStepGranularity">2sp</item>
+        <item name="autoSizeTextType">uniform</item>
     </style>
 
 </resources>

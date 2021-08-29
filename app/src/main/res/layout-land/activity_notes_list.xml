@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -27,6 +26,7 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/item_note_row" />
@@ -46,13 +46,12 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvNoNotes"
-            android:layout_width="271dp"
-            android:layout_height="67dp"
+            style="@style/AutoSizeTextViewBigger"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:maxLines="20"
             android:text="@string/no_notes_label"
             android:textColor="@color/white"
-            android:textSize="30sp"
             android:textStyle="bold|italic"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
