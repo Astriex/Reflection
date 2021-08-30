@@ -8,6 +8,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/drawable/gradient_background.xml" value="0.26461538461538464" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/drawable/ic_image_placeholder.xml" value="0.26461538461538464" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.26461538461538464" />
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/drawable/input_outline.xml" value="0.23796296296296296" />
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/activity_edit_note.xml" value="0.264" />
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout-land/activity_notes_list.xml" value="0.13125" />
@@ -21,6 +24,8 @@
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_post_note.xml" value="0.264" />
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/activity_register.xml" value="0.264" />
         <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/layout/item_note_row.xml" value="0.264" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.26461538461538464" />
+        <entry key="..\:/Users/melis/StudioProjects/Reflection/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.26461538461538464" />
       </map>
     </option>
   </component>
