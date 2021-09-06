@@ -50,13 +50,14 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditDate"
             style="@style/AutoSizeTextViewSmaller"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineEditNoteScreenSplit_land"
             app:layout_constraintStart_toStartOf="@+id/tvEditUsername" />
 
         <com.google.android.material.textfield.TextInputLayout

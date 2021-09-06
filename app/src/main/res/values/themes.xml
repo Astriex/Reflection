@@ -34,21 +34,21 @@
 
     <style name="AutoSizeTextViewRegular" parent="Widget.MaterialComponents.TextView">
         <item name="autoSizeMinTextSize">16sp</item>
-        <item name="autoSizeMaxTextSize">48sp</item>
+        <item name="autoSizeMaxTextSize">46sp</item>
         <item name="android:autoSizeStepGranularity">2sp</item>
         <item name="autoSizeTextType">uniform</item>
     </style>
 
     <style name="AutoSizeTextViewBigger" parent="Widget.MaterialComponents.TextView">
         <item name="autoSizeMinTextSize">18sp</item>
-        <item name="autoSizeMaxTextSize">50sp</item>
+        <item name="autoSizeMaxTextSize">48sp</item>
         <item name="android:autoSizeStepGranularity">2sp</item>
         <item name="autoSizeTextType">uniform</item>
     </style>
 
     <style name="AutoSizeTextViewSmaller" parent="Widget.MaterialComponents.TextView">
         <item name="autoSizeMinTextSize">14sp</item>
-        <item name="autoSizeMaxTextSize">46sp</item>
+        <item name="autoSizeMaxTextSize">44sp</item>
         <item name="android:autoSizeStepGranularity">2sp</item>
         <item name="autoSizeTextType">uniform</item>
     </style>

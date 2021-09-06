@@ -36,7 +36,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditUsername"
             style="@style/AutoSizeTextViewBigger"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
@@ -51,7 +51,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvEditDate"
             style="@style/AutoSizeTextViewSmaller"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_italic"

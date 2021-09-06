@@ -46,7 +46,7 @@
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostUsername"
             style="@style/AutoSizeTextViewBigger"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/roboto_slab_bold"
@@ -54,18 +54,20 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/tvPostDate"
+            app:layout_constraintEnd_toStartOf="@+id/guidelinePostNoteScreenSplit_land"
             app:layout_constraintStart_toStartOf="parent" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvPostDate"
             style="@style/AutoSizeTextViewSmaller"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guidelinePostNoteScreenSplit_land"
             app:layout_constraintStart_toStartOf="@+id/tvPostUsername" />
 
         <com.google.android.material.textfield.TextInputLayout
