@@ -8,12 +8,15 @@ import com.astriex.reflection.data.models.Note
 import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NotesListViewModel @Inject constructor(private val repository: FirebaseRepository) :
     ViewModel() {
+    private val _isLoading = MutableLiveData(false)
+    val isLoading = _isLoading
     var result = MutableLiveData<Result>()
 
     fun resetResult() {
@@ -29,5 +32,13 @@ class NotesListViewModel @Inject constructor(private val repository: FirebaseRep
             result.value = repository.deleteNote(note)
         }
         return result
+    }
+
+    fun startLoading() {
+        _isLoading.postValue(true)
+    }
+
+    fun stopLoading() {
+        _isLoading.postValue(false)
     }
 }

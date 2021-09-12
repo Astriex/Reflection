@@ -1,7 +1,6 @@
 package com.astriex.reflection.ui.activities.postNote
 
 import android.net.Uri
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,20 +14,21 @@ import javax.inject.Inject
 @HiltViewModel
 class PostNoteViewModel @Inject constructor(private val repository: FirebaseRepository) :
     ViewModel() {
-    val isLoading = MutableLiveData(false)
-    val userData: LiveData<User> = repository.userData
+    private val _isLoading = MutableLiveData(false)
+    val isLoading = _isLoading
+    val userData = repository.userData
     var result = MutableLiveData<Result>()
     var message = String()
 
     init {
-        repository.getUserData()
+        repository.loadUserData()
     }
 
     suspend fun saveNote(title: String, content: String, imageUri: Uri?, username: String) {
         viewModelScope.launch {
-            isLoading.postValue(true)
+            _isLoading.postValue(true)
             result.value = repository.saveNote(title, content, imageUri!!, username)
-            isLoading.postValue(false)
+            _isLoading.postValue(false)
         }
     }
 

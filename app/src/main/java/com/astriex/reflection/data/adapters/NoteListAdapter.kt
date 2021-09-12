@@ -1,5 +1,6 @@
 package com.astriex.reflection.data.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.format.DateUtils
 import android.view.LayoutInflater
@@ -70,6 +71,7 @@ class NoteListAdapter(
         return DateUtils.getRelativeTimeSpanString(timestamp.seconds * 1000).toString()
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     fun setNotes(notes: List<Note>) {
         adapterNotes = notes as MutableList<Note>
         notifyDataSetChanged()

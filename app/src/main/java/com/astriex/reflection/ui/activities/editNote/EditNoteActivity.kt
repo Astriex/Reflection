@@ -50,38 +50,33 @@ class EditNoteActivity : AppCompatActivity() {
         }
     }
 
-    private fun update() {
-        viewModel.updateNote(receivedNote!!).observe(this, { result ->
-            handleResponse(result)
-            viewModel.resetResult()
-        })
-    }
-
-    private fun handleResponse(result: Result) {
-        when (result) {
-            is Result.Success -> launchActivity<NotesListActivity>()
-            is Result.Error -> snackbar(result.message)
-        }
-    }
-
     private fun setupEditNoteView() {
         receivedNote = intent.getParcelableExtra("note") as? Note
         binding.let {
             it.tvEditUsername.text = receivedNote!!.username
-            it.tvEditDate.text = getFormattedDate()
+            it.tvEditDate.text = viewModel.getFormattedDate(receivedNote!!)
             it.etEditTitle.setText(receivedNote!!.title)
             it.etEditContent.setText(receivedNote!!.content)
             Glide.with(this).load(receivedNote!!.imageUrl)
-                .placeholder(R.drawable.ic_image_placeholder)
                 .into(it.ivEditHeader)
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
-    private fun getFormattedDate(): String {
-        val date = receivedNote!!.timeAdded!!.toDate()
-        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
-        return sdf.format(date)
+    private fun update() {
+        viewModel.updateNote(receivedNote!!).observe(this, { result ->
+            handleUpdateResponse(result)
+            viewModel.resetResult()
+        })
+    }
+
+    private fun handleUpdateResponse(result: Result) {
+        when (result) {
+            is Result.Success -> {
+                launchActivity<NotesListActivity>()
+                finish()
+            }
+            is Result.Error -> snackbar(result.message)
+        }
     }
 
     private fun getFields() {

@@ -35,7 +35,6 @@
             android:id="@+id/fabAdd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="44dp"
             android:backgroundTint="@color/secondaryColor"
             android:contentDescription="@string/cont_desc_fab_button"
             android:src="@drawable/ic_add"

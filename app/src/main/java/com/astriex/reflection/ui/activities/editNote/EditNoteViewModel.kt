@@ -1,5 +1,6 @@
 package com.astriex.reflection.ui.activities.editNote
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,17 +10,15 @@ import com.astriex.reflection.data.repositories.FirebaseRepository
 import com.astriex.reflection.util.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 @HiltViewModel
 class EditNoteViewModel @Inject constructor(private val repository: FirebaseRepository) : ViewModel() {
-    val isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData(false)
+    val isLoading = _isLoading
     var result = MutableLiveData<Result>()
     var message = String()
-
-    init {
-        repository.getNotebookData()
-    }
 
     fun resetResult() {
         result = MutableLiveData<Result>()
@@ -27,9 +26,9 @@ class EditNoteViewModel @Inject constructor(private val repository: FirebaseRepo
 
     fun updateNote(note: Note): LiveData<Result> {
         viewModelScope.launch {
-            isLoading.postValue(true)
+            _isLoading.postValue(true)
             result.value = repository.updateNote(note)
-            isLoading.postValue(false)
+            _isLoading.postValue(false)
         }
         return result
     }
@@ -46,6 +45,13 @@ class EditNoteViewModel @Inject constructor(private val repository: FirebaseRepo
             }
         }
         return isValid
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun getFormattedDate(note: Note): String {
+        val date = note.timeAdded!!.toDate()
+        val sdf = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        return sdf.format(date)
     }
 
 }

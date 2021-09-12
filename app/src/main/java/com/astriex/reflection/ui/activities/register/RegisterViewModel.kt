@@ -12,20 +12,21 @@ import javax.inject.Inject
 
 @HiltViewModel
 class RegisterViewModel @Inject constructor(val repository: FirebaseRepository) : ViewModel() {
-    val isLoading = MutableLiveData<Boolean>()
+    private val _isLoading = MutableLiveData(false)
+    val isLoading = _isLoading
     var result = MutableLiveData<Result>()
-    var message = MutableLiveData<String>()
+    var message = String()
 
-    // prevent repeat of toast message
+    // Prevent repeat of login btn snackbar message on config change
     fun resetResult() {
         result = MutableLiveData<Result>()
     }
 
     fun registerUser(email: String, password: String, username: String): LiveData<Result> {
         viewModelScope.launch {
-            isLoading.postValue(true)
+            _isLoading.postValue(true)
             result.value = repository.registerUser(email, password, username)
-            isLoading.postValue(false)
+            _isLoading.postValue(false)
         }
         return result
     }
@@ -34,7 +35,7 @@ class RegisterViewModel @Inject constructor(val repository: FirebaseRepository) 
         var isValid = false
 
         if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            message.value = "Fields cannot be empty"
+            message = "Fields cannot be empty"
         } else {
             isValid = true
         }

@@ -123,15 +123,17 @@
             app:layout_constraintTop_toBottomOf="@id/guidelineCardViewRegisterBottom"
             app:layout_constraintVertical_bias="0.0" />
 
-        <com.google.android.material.progressindicator.CircularProgressIndicator
+        <ProgressBar
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE, default=gone}"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.859" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineCardViewRegisterStart"

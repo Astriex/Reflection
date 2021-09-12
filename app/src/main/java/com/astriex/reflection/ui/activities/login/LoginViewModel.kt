@@ -12,7 +12,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(private val repository: FirebaseRepository) : ViewModel() {
-    val isLoading = MutableLiveData(false)
+    private val _isLoading = MutableLiveData(false)
+    val isLoading = _isLoading
     var result = MutableLiveData<Result>()
     var message = String()
 
@@ -23,9 +24,9 @@ class LoginViewModel @Inject constructor(private val repository: FirebaseReposit
 
     fun loginUser(email: String, password: String): LiveData<Result> {
         viewModelScope.launch {
-            isLoading.postValue(true)
+            _isLoading.postValue(true)
             result.value = repository.loginUser(email, password)
-            isLoading.postValue(false)
+            _isLoading.postValue(false)
         }
         return result
     }

@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.astriex.reflection.R
 import com.astriex.reflection.databinding.ActivityRegisterBinding
-import com.astriex.reflection.ui.activities.postNote.PostNoteActivity
+import com.astriex.reflection.ui.activities.notesList.NotesListActivity
 import com.astriex.reflection.util.Result
 import com.astriex.reflection.util.launchActivity
 import com.astriex.reflection.util.snackbar
@@ -40,23 +40,23 @@ class RegisterActivity : AppCompatActivity() {
             if (viewModel.isDataValid(username, email, password)) {
                 register()
             } else {
-                snackbar(viewModel.message.value!!)
+                snackbar(viewModel.message)
             }
         }
     }
 
     private fun register() {
         viewModel.registerUser(email, password, username).observe(this, { result ->
-            handleResponse(result)
+            handleRegisterResponse(result)
             viewModel.resetResult()
         })
     }
 
-    private fun handleResponse(result: Result) {
+    private fun handleRegisterResponse(result: Result) {
         when (result) {
             is Result.Success -> {
-                snackbar("Account created successfully")
-                startNewNote()
+                showNotesList()
+                finish()
             }
             is Result.Error -> {
                 snackbar(result.message)
@@ -64,9 +64,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun startNewNote() {
-        launchActivity<PostNoteActivity>()
-        finish()
+    private fun showNotesList() {
+        launchActivity<NotesListActivity>()
     }
 
     private fun getFieldData() {

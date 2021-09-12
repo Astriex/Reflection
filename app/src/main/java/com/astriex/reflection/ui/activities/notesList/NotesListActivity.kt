@@ -4,9 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.astriex.reflection.R
@@ -40,9 +42,13 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         setupListeners()
 
         setNoNotesView()
-        CoroutineScope(Dispatchers.Main).launch {
+        lifecycle.coroutineScope.launch {
             loadNotes()
         }
+    }
+
+    private fun setupActionbar() {
+        supportActionBar!!.elevation = 0F
     }
 
     private fun setupListeners() {
@@ -51,20 +57,28 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
         }
     }
 
-    private fun setupActionbar() {
-        supportActionBar!!.elevation = 0F
+    private fun startNewNote() {
+        launchActivity<PostNoteActivity>()
     }
 
     private suspend fun loadNotes() {
         viewModel.loadNotes().collect { result ->
             when (result) {
                 is Result.Success -> {
+                    viewModel.stopLoading()
                     if((result.data as List<*>).isNotEmpty()) {
                         showNotesView(result)
+                    } else {
+                        setNoNotesView()
                     }
                 }
                 is Result.Error -> {
+                    viewModel.stopLoading()
                     showNoNotesView(result)
+                }
+                Result.Loading -> {
+                    binding.tvNoNotes.hide()
+                    viewModel.startLoading()
                 }
             }
         }
@@ -110,10 +124,6 @@ class NotesListActivity : AppCompatActivity(), OnItemClickListener {
             }
         }
         return super.onOptionsItemSelected(item)
-    }
-
-    private fun startNewNote() {
-        launchActivity<PostNoteActivity>()
     }
 
     private fun logout() {

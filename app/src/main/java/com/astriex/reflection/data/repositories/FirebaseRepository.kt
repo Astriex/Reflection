@@ -35,13 +35,15 @@ class FirebaseRepository @Inject constructor(
     val userData = MutableLiveData<User>()
 
     /**
-     * Register new app user.
+     * Register a new app user.
      */
     suspend fun registerUser(email: String, password: String, username: String): Result {
         return try {
-            createAcc(email, password)
-            saveUserToCollection(username)
-            Result.Success()
+            withContext(Dispatchers.IO) {
+                createAcc(email, password)
+                saveUserToCollection(username)
+                Result.Success()
+            }
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }
@@ -99,52 +101,43 @@ class FirebaseRepository @Inject constructor(
      */
     suspend fun loginUser(email: String, password: String): Result {
         return try {
-            firebaseAuth.signInWithEmailAndPassword(email, password).await()
-            Result.Success()
+            withContext(Dispatchers.IO) {
+                firebaseAuth.signInWithEmailAndPassword(email, password).await()
+                Result.Success()
+            }
         } catch (e: Exception) {
             Result.Error(e.message.toString())
         }
     }
 
     /**
-     * Get user data for current user.
+     * Load user data for the current user.
      */
-    fun getUserData() = flow<Result> {
+    fun loadUserData() {
+        var user: User? = null
         getCurrentUserId()?.let { id ->
-            val snapshot = userCollectionReference
+            var user: User? = null
+            userCollectionReference
                 .whereEqualTo("userId", id)
-                .get()
-                .await()
-
-            val user = snapshot.toObjects(User::class.java)
-            emit(Result.Success(user))
+                .addSnapshotListener { value, _ ->
+                    value?.forEach {
+                        if (it.exists()) {
+                            user = User(
+                                it.getString(Constants.USERNAME)!!,
+                                it.getString(Constants.USER_ID)!!
+                            )
+                            userData.value = user!!
+                        }
+                    }
+                }
         }
-//        var user: User? = null
-//        val userId = firebaseAuth.currentUser?.uid
-//        if (userId != null) {
-//            userCollectionReference
-//                .whereEqualTo("userId", userId)
-//                .addSnapshotListener { value, _ ->
-//                    value?.forEach {
-//                        if (it.exists()) {
-//                            user = User(
-//                                it.getString(Constants.USERNAME)!!,
-//                                it.getString(Constants.USER_ID)!!
-//                            )
-//                            userData.postValue(user!!)
-//                        }
-//                    }
-//                }
-//        }
-
-    }.catch {
-        emit(Result.Error(it.message.toString()))
-    }.flowOn(Dispatchers.IO)
+    }
 
     /**
      * Get all notes for the current user.
      */
     fun getNotebookData() = flow<Result> {
+        emit(Result.Loading)
         val snapshot =
             notebookCollectionReference
                 .whereEqualTo(Constants.USER_ID, getCurrentUserId())
