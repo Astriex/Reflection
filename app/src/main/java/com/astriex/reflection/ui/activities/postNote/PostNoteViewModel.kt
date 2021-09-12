@@ -21,7 +21,7 @@ class PostNoteViewModel @Inject constructor(private val repository: FirebaseRepo
     var message = String()
 
     init {
-        repository.loadUserData()
+        repository.getUserData()
     }
 
     suspend fun saveNote(title: String, content: String, imageUri: Uri?, username: String) {

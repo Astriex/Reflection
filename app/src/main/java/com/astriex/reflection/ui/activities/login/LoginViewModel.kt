@@ -16,7 +16,7 @@ class LoginViewModel @Inject constructor(private val repository: FirebaseReposit
     var result = MutableLiveData<Result>()
     var message = String()
 
-    // prevent repeat of login btn toast message
+    // Prevent repeat of login btn snackbar message on config change
     fun resetResult() {
         result = MutableLiveData<Result>()
     }

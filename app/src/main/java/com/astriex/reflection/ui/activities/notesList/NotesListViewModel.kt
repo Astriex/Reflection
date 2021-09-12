@@ -22,7 +22,7 @@ class NotesListViewModel @Inject constructor(private val repository: FirebaseRep
 
     fun signOut() = repository.signOut()
 
-    fun loadNotes() = repository.loadNotebookData()
+    fun loadNotes() = repository.getNotebookData()
 
     fun deleteNote(note: Note): LiveData<Result> {
         viewModelScope.launch {

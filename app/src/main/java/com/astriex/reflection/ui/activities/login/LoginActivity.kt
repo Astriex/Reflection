@@ -50,12 +50,12 @@ class LoginActivity : AppCompatActivity() {
 
     private fun login() {
         viewModel.loginUser(email, password).observe(this, { result ->
-            handleResult(result)
+            handleLoginResult(result)
             viewModel.resetResult()
         })
     }
 
-    private fun handleResult(result: Result) {
+    private fun handleLoginResult(result: Result) {
         when (result) {
             is Result.Success -> {
                 launchActivity<NotesListActivity>()

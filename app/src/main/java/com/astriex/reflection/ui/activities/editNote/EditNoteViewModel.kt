@@ -18,7 +18,7 @@ class EditNoteViewModel @Inject constructor(private val repository: FirebaseRepo
     var message = String()
 
     init {
-        repository.loadNotebookData()
+        repository.getNotebookData()
     }
 
     fun resetResult() {
