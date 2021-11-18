@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/primaryColor"
     android:gravity="center"
-    tools:context=".ui.activities.intro.IntroActivity">
+    tools:context=".presentation.activity.intro.IntroActivity">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/materialTextView"

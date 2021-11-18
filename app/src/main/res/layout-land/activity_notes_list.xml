@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.activities.notesList.NotesListViewModel" />
+            type="com.astriex.reflection.presentation.activity.notesList.NotesListViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
         android:padding="16dp"
-        tools:context=".ui.activities.notesList.NotesListActivity">
+        tools:context=".presentation.activity.notesList.NotesListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvNotes"

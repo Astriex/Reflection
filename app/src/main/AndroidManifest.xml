@@ -16,21 +16,21 @@
         android:theme="@style/Theme.Reflection"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".ui.activities.editNote.EditNoteActivity"
-            android:parentActivityName=".ui.activities.notesList.NotesListActivity"
+            android:name="com.astriex.reflection.presentation.activity.editNote.EditNoteActivity"
+            android:parentActivityName="com.astriex.reflection.presentation.activity.notesList.NotesListActivity"
             android:windowSoftInputMode="adjustPan"/>
-        <activity android:name=".ui.activities.notesList.NotesListActivity" />
+        <activity android:name="com.astriex.reflection.presentation.activity.notesList.NotesListActivity" />
         <activity
-            android:name=".ui.activities.postNote.PostNoteActivity"
-            android:parentActivityName=".ui.activities.notesList.NotesListActivity"
+            android:name="com.astriex.reflection.presentation.activity.postNote.PostNoteActivity"
+            android:parentActivityName="com.astriex.reflection.presentation.activity.notesList.NotesListActivity"
             android:windowSoftInputMode="adjustPan"/>
         <activity
-            android:name=".ui.activities.register.RegisterActivity"
-            android:parentActivityName=".ui.activities.login.LoginActivity"
+            android:name="com.astriex.reflection.presentation.activity.register.RegisterActivity"
+            android:parentActivityName="com.astriex.reflection.presentation.activity.login.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activities.login.LoginActivity"
+        <activity android:name="com.astriex.reflection.presentation.activity.login.LoginActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activities.intro.IntroActivity"
+        <activity android:name="com.astriex.reflection.presentation.activity.intro.IntroActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

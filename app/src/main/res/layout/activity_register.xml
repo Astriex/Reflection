@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.activities.register.RegisterViewModel" />
+            type="com.astriex.reflection.presentation.activity.register.RegisterViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
         android:gravity="center"
-        tools:context=".ui.activities.register.RegisterActivity">
+        tools:context=".presentation.activity.register.RegisterActivity">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardViewRegister"

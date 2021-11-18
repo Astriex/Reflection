@@ -6,7 +6,7 @@ import android.net.ConnectivityManager
 import android.os.Build
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.astriex.reflection.data.models.Note
+import com.astriex.reflection.domain.model.Note
 import com.google.android.material.snackbar.Snackbar
 
 fun Activity.snackbar(message: String) =

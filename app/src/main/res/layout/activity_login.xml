@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.activities.login.LoginViewModel" />
+            type="com.astriex.reflection.presentation.activity.login.LoginViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
         android:gravity="center"
-        tools:context=".ui.activities.login.LoginActivity">
+        tools:context=".presentation.activity.login.LoginActivity">
 
         <ProgressBar
             android:id="@+id/loginProgress"

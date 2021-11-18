@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.astriex.reflection.ui.activities.editNote.EditNoteViewModel" />
+            type="com.astriex.reflection.presentation.activity.editNote.EditNoteViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +18,7 @@
         android:background="@color/primaryColor"
         android:padding="8dp"
         android:scrollbars="vertical"
-        tools:context=".ui.activities.postNote.PostNoteActivity">
+        tools:context=".presentation.activity.postNote.PostNoteActivity">
 
         <ImageView
             android:id="@+id/ivEditHeader"
