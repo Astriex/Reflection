@@ -7,14 +7,14 @@ import javax.inject.Inject
 class LoginUserUseCase @Inject constructor(val repository: FirebaseRepository) {
 
     suspend operator fun invoke(email: String, password: String): Result {
-        return if (areFieldsEmpty(email, password)) {
+        return if (isDataValid(email, password)) {
             repository.loginUser(email, password)
         } else {
             Result.Error("Fields cannot be empty")
         }
     }
 
-    private fun areFieldsEmpty(email: String, password: String) =
+    private fun isDataValid(email: String, password: String) =
         email.trim().isNotEmpty() && password.trim().isNotEmpty()
 
 }
