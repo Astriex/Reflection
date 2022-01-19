@@ -1,5 +1,5 @@
 # Reflection
-Journaling app focused on promoting self care. 
+A journaling app to create interesting and personalized notes presented as a list. 
 
 ## Tech used
 * MVVM
