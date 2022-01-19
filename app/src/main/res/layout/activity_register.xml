@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.presentation.activity.register.RegisterViewModel" />
@@ -25,8 +23,8 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/white"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="8dp"
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation"
             app:layout_constraintBottom_toTopOf="@id/guidelineCardViewRegisterBottom"
             app:layout_constraintEnd_toEndOf="@id/guidelineCardViewRegisterEnd"
             app:layout_constraintStart_toStartOf="@id/guidelineCardViewRegisterStart"
@@ -35,14 +33,14 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingStart="10dp"
-                android:paddingEnd="10dp">
+                android:paddingStart="@dimen/med_padding"
+                android:paddingEnd="@dimen/med_padding">
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilRegisterUsername"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="@dimen/input_field_height"
                     app:endIconMode="clear_text"
                     app:layout_constraintBottom_toTopOf="@+id/tilRegisterEmail"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -64,7 +62,7 @@
                     android:id="@+id/tilRegisterEmail"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="@dimen/input_field_height"
                     app:endIconMode="clear_text"
                     app:layout_constraintBottom_toTopOf="@+id/tilRegisterPassword"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,8 +76,8 @@
                         android:hint="@string/hint_email"
                         android:inputType="textEmailAddress"
                         android:maxLines="1"
-                        android:paddingLeft="16dp"
-                        android:textSize="16sp" />
+                        android:paddingLeft="@dimen/large_padding"
+                        android:textSize="@dimen/med_txt_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -87,7 +85,7 @@
                     android:id="@+id/tilRegisterPassword"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="0dp"
-                    android:layout_height="56dp"
+                    android:layout_height="@dimen/input_field_height"
                     app:endIconMode="password_toggle"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -113,8 +111,8 @@
             android:id="@+id/btnCreateAccount"
             style="@style/BaseOutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginTop="30dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/btn_margin_top"
             android:text="@string/btn_create_account_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/guidelineCardViewRegisterEnd"
@@ -140,28 +138,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.15" />
+            app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineCardViewRegisterEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.85" />
+            app:layout_constraintGuide_percent="0.9" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineCardViewRegisterTop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.25" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelineCardViewRegisterBottom"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.65" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

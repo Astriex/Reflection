@@ -18,19 +18,24 @@
         <activity
             android:name="com.astriex.reflection.presentation.activity.editNote.EditNoteActivity"
             android:parentActivityName="com.astriex.reflection.presentation.activity.notesList.NotesListActivity"
+            android:label="Edit Note"
             android:windowSoftInputMode="adjustPan"/>
         <activity android:name="com.astriex.reflection.presentation.activity.notesList.NotesListActivity" />
         <activity
             android:name="com.astriex.reflection.presentation.activity.postNote.PostNoteActivity"
             android:parentActivityName="com.astriex.reflection.presentation.activity.notesList.NotesListActivity"
+            android:label="New Note"
             android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name="com.astriex.reflection.presentation.activity.register.RegisterActivity"
             android:parentActivityName="com.astriex.reflection.presentation.activity.login.LoginActivity"
+            android:label="Register"
             android:screenOrientation="portrait"/>
         <activity android:name="com.astriex.reflection.presentation.activity.login.LoginActivity"
+            android:label=""
             android:screenOrientation="portrait"/>
         <activity android:name="com.astriex.reflection.presentation.activity.intro.IntroActivity"
+            android:label=""
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

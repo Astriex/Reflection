@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.presentation.activity.notesList.NotesListViewModel" />
@@ -16,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="16dp"
+        android:padding="@dimen/large_padding"
         tools:context=".presentation.activity.notesList.NotesListActivity">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -46,7 +44,7 @@
             android:id="@+id/tvNoNotes"
             style="@style/AutoSizeTextViewSmaller"
             android:layout_width="0dp"
-            android:layout_height="56dp"
+            android:layout_height="@dimen/no_notes_text_size"
             android:gravity="center"
             android:text="@string/no_notes_label"
             android:textColor="@color/white"
@@ -62,7 +60,7 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
+            android:elevation="@dimen/progress_bar_elevation"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

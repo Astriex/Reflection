@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.presentation.activity.editNote.EditNoteViewModel" />
@@ -16,57 +14,79 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="20dp"
+        android:padding="@dimen/large_padding"
         android:scrollbars="vertical"
         tools:context=".presentation.activity.postNote.PostNoteActivity">
 
-        <ImageView
-            android:id="@+id/ivEditHeader"
-            android:layout_width="0dp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvEditHeader"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:contentDescription="@string/cont_desc_note_image"
-            android:scaleType="fitXY"
             android:src="@android:color/transparent"
-            app:layout_constraintBottom_toTopOf="@id/guidelineEditNoteImageBottom_port"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:cardCornerRadius="@dimen/card_corner_radius"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_image_placeholder" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvEditUsername"
-            style="@style/AutoSizeTextViewBigger"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/roboto_slab_bold"
-            android:text="@string/hint_username"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/tvEditDate"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/guidelineEditNoteImageBottom_port">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvEditDate"
-            style="@style/AutoSizeTextViewSmaller"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:fontFamily="@font/roboto_italic"
-            android:text="@string/today_timestamp"
-            android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@+id/ivEditHeader"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayoutItemNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|bottom"
+                android:alpha="0.7"
+                android:background="@color/imageHeaderColor"
+                android:elevation="@dimen/transparent_layout_elevation">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvEditUsername"
+                    style="@style/AutoSizeTextViewBigger"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/min_padding"
+                    android:fontFamily="@font/roboto_slab_bold"
+                    android:text="@string/hint_username"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/tvEditDate"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvEditDate"
+                    style="@style/AutoSizeTextViewSmaller"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/min_padding"
+                    android:fontFamily="@font/roboto_italic"
+                    android:text="@string/today_timestamp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/ivEditHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/cont_desc_note_image"
+                android:scaleType="fitXY"
+                android:src="@android:color/transparent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/ic_image_placeholder" />
+
+        </androidx.cardview.widget.CardView>
 
         <ProgressBar
             android:id="@+id/postProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
+            android:elevation="@dimen/progress_bar_elevation"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -78,22 +98,22 @@
             android:id="@+id/tilTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/min_padding"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ivEditHeader">
+            app:layout_constraintTop_toBottomOf="@+id/cvEditHeader">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditTitle"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/input_field_height"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/hint_title"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:padding="5dp" />
+                android:padding="@dimen/min_padding" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,8 +121,8 @@
             android:id="@+id/tilContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="@dimen/min_padding"
+            android:layout_marginBottom="@dimen/btn_margin_top"
             app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@+id/btnPostSave"
             app:layout_constraintEnd_toEndOf="parent"
@@ -120,10 +140,10 @@
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxLines="20"
-                android:padding="15dp"
+                android:padding="@dimen/large_padding"
                 android:scrollbars="vertical"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textSize="20sp" />
+                android:textSize="@dimen/large_txt_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -131,7 +151,7 @@
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/btn_height"
             android:text="@string/btn_save_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

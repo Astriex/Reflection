@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+
+    <dimen name="input_field_height">56dp</dimen>
+    <dimen name="input_field_padding">5dp</dimen>
+
+    <dimen name="btn_height">56dp</dimen>
+    <dimen name="btn_margin_top">30dp</dimen>
+
+    <dimen name="no_notes_text_size">56dp</dimen>
+
+    <dimen name="insert_image_icon_width">98dp</dimen>
+    <dimen name="insert_image_icon_height">79dp</dimen>
+
+    <dimen name="min_padding">8dp</dimen>
+    <dimen name="med_padding">10dp</dimen>
+    <dimen name="large_padding">16dp</dimen>
+
+    <dimen name="login_basic_text_size">36dp</dimen>
+
+    <dimen name="progress_bar_elevation">2dp</dimen>
+
+    <dimen name="transparent_layout_elevation">10dp</dimen>
+    <dimen name="large_txt_size">20sp</dimen>
+    <dimen name="med_txt_size">16sp</dimen>
+    <dimen name="row_item_width">300dp</dimen>
+    <dimen name="row_item_height">300dp</dimen>
+
+</resources>

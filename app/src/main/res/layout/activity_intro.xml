@@ -13,40 +13,35 @@
         android:id="@+id/materialTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeMaxTextSize="100sp"
-        android:autoSizeMinTextSize="30sp"
-        android:autoSizeTextType="uniform"
+        style="@style/AutoSizeTextViewBigger"
+        android:layout_marginBottom="@dimen/btn_margin_top"
         android:fontFamily="@font/roboto_slab_bold"
         android:gravity="center"
         android:text="@string/reflect_notebook"
         android:textColor="@color/secondaryColor"
-        app:autoSizeStepGranularity="2sp"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView"
         app:layout_constraintEnd_toStartOf="@+id/guidelineEndMain"
         app:layout_constraintStart_toStartOf="@id/guidelineStartMain"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineTopMain" />
-
+        app:layout_constraintTop_toBottomOf="@+id/guidelineTopMain"/>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation"
         app:cardUseCompatPadding="true"
         app:layout_constraintBottom_toTopOf="@id/guidelineBottomCardView"
         app:layout_constraintEnd_toStartOf="@id/guidelineCardViewEnd"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@id/guidelineCardViewStart"
-        app:layout_constraintTop_toBottomOf="@id/guidelineTopCardView"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@id/guidelineTopCardView">
 
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:layout_margin="10dp"
-            style="@style/AutoSizeTextViewRegular"
+            android:layout_margin="@dimen/large_padding"
+            style="@style/AutoSizeTextViewSmaller"
             android:fontFamily="@font/roboto_slab_light"
             android:gravity="center"
             android:text="@string/what_are_you_thinking"
@@ -58,8 +53,9 @@
         android:id="@+id/btnStart"
         style="@style/BaseOutlinedButton"
         android:layout_width="0dp"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/btn_height"
         android:text="@string/btn_get_started_text"
+        android:layout_marginTop="@dimen/btn_margin_top"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guidelineCardViewEnd"
         app:layout_constraintHorizontal_bias="0.0"
@@ -72,7 +68,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.25" />
+        app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineStartMain"
@@ -103,31 +99,17 @@
         app:layout_constraintGuide_percent="0.55" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineStartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.25" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineEndButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.75" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCardViewStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineCardViewEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

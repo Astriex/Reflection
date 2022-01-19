@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.presentation.activity.editNote.EditNoteViewModel" />
@@ -16,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="8dp"
+        android:padding="@dimen/min_padding"
         android:scrollbars="vertical"
         tools:context=".presentation.activity.postNote.PostNoteActivity">
 
@@ -24,7 +22,7 @@
             android:id="@+id/ivEditHeader"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="@dimen/med_padding"
             android:contentDescription="@string/cont_desc_note_image"
             android:scaleType="fitXY"
             android:src="@android:color/transparent"
@@ -39,7 +37,7 @@
             style="@style/AutoSizeTextViewBigger"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/min_padding"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
             android:textColor="@color/black"
@@ -53,7 +51,7 @@
             style="@style/AutoSizeTextViewSmaller"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/med_padding"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
@@ -65,7 +63,7 @@
             android:id="@+id/tilTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/large_padding"
             android:gravity="end"
             app:hintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
@@ -75,14 +73,14 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEditTitle"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/input_field_height"
                 android:layout_gravity="center_vertical"
                 android:ems="10"
                 android:fontFamily="@font/roboto_slab_bold"
                 android:hint="@string/hint_title"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:padding="5dp" />
+                android:padding="@dimen/min_padding" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,8 +88,8 @@
             android:id="@+id/tilContent"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginTop="@dimen/med_padding"
             android:gravity="end"
             app:hintEnabled="false"
             app:layout_constraintBottom_toTopOf="@id/guidelineEditNoteContentBottom_land"
@@ -113,7 +111,7 @@
                 android:padding="15dp"
                 android:scrollbars="vertical"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textSize="20sp" />
+                android:textSize="@dimen/large_txt_size" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -121,7 +119,7 @@
             android:id="@+id/postProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:elevation="2dp"
+            android:elevation="@dimen/progress_bar_elevation"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -132,9 +130,9 @@
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginTop="@dimen/min_padding"
             android:text="@string/btn_save_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

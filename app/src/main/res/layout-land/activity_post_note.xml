@@ -5,7 +5,6 @@
 
     <data>
         <import type="android.view.View" />
-
         <variable
             name="viewModel"
             type="com.astriex.reflection.presentation.activity.postNote.PostNoteViewModel" />
@@ -15,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primaryColor"
-        android:padding="8dp"
+        android:padding="@dimen/med_padding"
         android:scrollbars="vertical"
         tools:context=".presentation.activity.postNote.PostNoteActivity">
 
@@ -23,7 +22,7 @@
             android:id="@+id/ivHeader"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="@dimen/med_padding"
             android:contentDescription="@string/cont_desc_note_image"
             android:src="@android:color/transparent"
             app:layout_constraintBottom_toTopOf="@+id/guidelinePostContentBottom_land"
@@ -33,8 +32,8 @@
 
         <ImageView
             android:id="@+id/ivAddPhoto"
-            android:layout_width="98dp"
-            android:layout_height="79dp"
+            android:layout_width="@dimen/insert_image_icon_width"
+            android:layout_height="@dimen/insert_image_icon_height"
             android:contentDescription="@string/cont_desc_add_photo_image"
             android:onClick="getImage"
             app:layout_constraintBottom_toBottomOf="@id/ivHeader"
@@ -48,7 +47,7 @@
             style="@style/AutoSizeTextViewBigger"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/min_padding"
             android:fontFamily="@font/roboto_slab_bold"
             android:text="@string/hint_username"
             android:textColor="@color/black"
@@ -62,7 +61,7 @@
             style="@style/AutoSizeTextViewSmaller"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="@dimen/med_padding"
             android:fontFamily="@font/roboto_italic"
             android:text="@string/today_timestamp"
             android:textColor="@color/black"
@@ -73,8 +72,8 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tilPostTitle_land"
             android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_marginStart="16dp"
+            android:layout_height="@dimen/input_field_height"
+            android:layout_marginStart="@dimen/large_padding"
             android:importantForAutofill="no"
             android:textColorHint="@color/black"
             app:hintEnabled="false"
@@ -91,7 +90,7 @@
                 android:hint="@string/hint_title"
                 android:importantForAutofill="no"
                 android:inputType="text"
-                android:padding="15dp" />
+                android:padding="@dimen/large_padding" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -111,9 +110,9 @@
             android:id="@+id/tilPostContent_land"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginTop="@dimen/med_padding"
+            android:layout_marginBottom="@dimen/min_padding"
             android:importantForAutofill="no"
             android:textColorHint="@color/black"
             app:hintEnabled="false"
@@ -134,19 +133,19 @@
                 android:importantForAutofill="no"
                 android:inputType="textMultiLine"
                 android:maxLines="20"
-                android:padding="15dp"
+                android:padding="@dimen/large_padding"
                 android:scrollbars="vertical"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                android:textSize="20sp" />
+                android:textSize="@dimen/large_txt_size" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPostSave"
             style="@style/SpecialOutlinedButton"
             android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginStart="@dimen/large_padding"
+            android:layout_marginTop="@dimen/min_padding"
             android:onClick="saveNote"
             android:text="@string/btn_save_text"
             app:layout_constraintEnd_toEndOf="parent"

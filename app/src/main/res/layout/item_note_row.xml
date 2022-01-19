@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="8dp">
+    android:layout_margin="@dimen/min_padding"
+    app:cardCornerRadius="@dimen/card_corner_radius">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutItemNote"
@@ -13,7 +13,7 @@
         android:layout_gravity="end"
         android:alpha="0.7"
         android:background="@color/imageHeaderColor"
-        android:elevation="10dp">
+        android:elevation="@dimen/transparent_layout_elevation">
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tvUsername"
@@ -22,13 +22,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab_bold"
             android:gravity="end"
-            android:padding="5dp"
+            android:padding="@dimen/min_padding"
             android:text="@string/hint_username"
             android:textColor="@color/black"
             android:textStyle="italic|bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.6" />
+            app:layout_constraintGuide_percent="0.65" />
 
         <ImageView
             android:id="@+id/ivNoteImage"
@@ -64,11 +65,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_slab_bold"
-            android:padding="10dp"
+            android:padding="@dimen/min_padding"
             android:text="@string/title_default_text"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guidelineItemImageBottom" />
 
@@ -77,11 +77,11 @@
             style="@style/AutoSizeTextViewRegular"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/min_padding"
             android:ellipsize="end"
             android:fontFamily="@font/roboto_slab_light"
             android:maxLines="1"
-            android:padding="10dp"
+            android:padding="@dimen/min_padding"
             android:text="@string/content_default_text"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -93,9 +93,9 @@
             style="@style/AutoSizeTextViewSmaller"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/min_padding"
             android:fontFamily="@font/roboto_italic"
-            android:padding="5dp"
+            android:padding="@dimen/min_padding"
             android:text="@string/timestamp_default_text"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"
