@@ -35,7 +35,7 @@
             android:label=""
             android:screenOrientation="portrait"/>
         <activity android:name="com.astriex.reflection.presentation.activity.intro.IntroActivity"
-            android:label=""
+            android:label="Reflection"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
